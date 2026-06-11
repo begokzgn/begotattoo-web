@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr" x-data="{ lang: 'tr', mobileMenu: false, filter: 'all' }">
+<html lang="tr" x-data="{ lang: 'tr', mobileMenu: false, filter: 'all' }" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A0A0B" />
   <meta name="description"
     content="BegoTattoo — İstanbul merkezli dövme stüdyosu. 10 yıllık deneyim, sanatsal yaklaşım, kişiye özel tasarım. Randevu için iletişime geçin." />
   <meta property="og:title" content="BegoTattoo — Ink with Story" />
@@ -11,7 +12,9 @@
     content="İstanbul'da hikâyesi olan mürekkep. Realistic, blackwork, fineline ve daha fazlası." />
   <meta property="og:image" content="img/og-image.jpg" />
   <meta property="og:type" content="website" />
-  <title>BegoTattoo — Ink with Story | İstanbul Tattoo Studio</title>
+  <title>BegoTattoo — Ink with Story | Taksim, İstanbul Tattoo Studio</title>
+
+  <script>document.documentElement.classList.add('js');</script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,24 +22,61 @@
       theme: {
         extend: {
           colors: {
-            'rich-black': '#0a0a0a',
-            'off-black': '#1a1a1a',
-            'card': '#141414',
-            'border-dark': '#2a2a2a',
-            'text-primary': '#f5f5f5',
-            'text-secondary': '#a0a0a0',
-            'text-muted': '#666666',
-            'blood': '#DC2626',
-            'sky-accent': '#38BDF8',
+            'ink': '#0A0A0B',
+            'coal': '#121214',
+            'card': '#161618',
+            'line': '#26262A',
+            'bone': '#EDE7DD',
+            'ash': '#9A958C',
+            'smoke': '#5C5852',
+            'blood': '#C8102E',
+            'bloodbright': '#F02540',
+            'stencil': '#7D6EE0',
           },
           fontFamily: {
-            display: ['Bebas Neue', 'sans-serif'],
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Cormorant Garamond', 'serif'],
+            display: ['"Big Shoulders Stencil"', '"Bebas Neue"', 'Impact', 'sans-serif'],
+            blackletter: ['"Pirata One"', '"Cormorant Garamond"', 'serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+            sans: ['Archivo', 'Inter', 'sans-serif'],
           },
           borderRadius: {
-            DEFAULT: '0px', 'sm': '0px', 'md': '0px', 'lg': '0px', 'xl': '0px',
+            DEFAULT: '0px', 'sm': '0px', 'md': '0px', 'lg': '0px', 'xl': '0px', '2xl': '0px',
           }
+        }
+      }
+    }
+  </script>
+
+  <!-- bookingForm — randevu formunu hazır WhatsApp mesajına çevirir -->
+  <script>
+    function bookingForm() {
+      return {
+        name: '', email: '', phone: '', style: '', date: '', time: '', idea: '',
+        send(l) {
+          const tr = l === 'tr';
+          const lines = tr ? [
+            'Merhaba Bego! Site üzerinden randevu talebim var.',
+            '',
+            'İsim: ' + this.name,
+            this.email ? 'E-posta: ' + this.email : null,
+            this.phone ? 'Telefon: ' + this.phone : null,
+            this.style ? 'Stil: ' + this.style : null,
+            (this.date || this.time) ? ('Tercih edilen zaman: ' + this.date + ' ' + this.time).trim() : null,
+            '',
+            'Fikrim: ' + this.idea
+          ] : [
+            'Hi Bego! I would like to book a session via the website.',
+            '',
+            'Name: ' + this.name,
+            this.email ? 'Email: ' + this.email : null,
+            this.phone ? 'Phone: ' + this.phone : null,
+            this.style ? 'Style: ' + this.style : null,
+            (this.date || this.time) ? ('Preferred time: ' + this.date + ' ' + this.time).trim() : null,
+            '',
+            'My idea: ' + this.idea
+          ];
+          const msg = lines.filter(x => x !== null).join('\n');
+          window.open('https://wa.me/905424590699?text=' + encodeURIComponent(msg), '_blank');
         }
       }
     }
@@ -44,64 +84,110 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,400..800&family=Pirata+One&family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Bebas+Neue&display=swap"
     rel="stylesheet" />
 
   <style>
     body {
-      background-color: #0a0a0a;
-      color: #f5f5f5;
-      font-family: 'Inter', sans-serif;
+      background-color: #0A0A0B;
+      color: #EDE7DD;
+      font-family: 'Archivo', sans-serif;
+    }
+
+    ::selection {
+      /* Stencil moru — termal stencil kağıdına selam */
+      background: #7D6EE0;
+      color: #0A0A0B;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0A0A0B;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #26262A;
+      border: 2px solid #0A0A0B;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C8102E;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
+      outline: 1px solid #C8102E;
+      outline-offset: 3px;
     }
 
     .font-display {
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
+      line-height: 0.9;
+    }
+
+    .txt-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px #EDE7DD;
     }
 
     .glass {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(10, 10, 11, 0.55);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(237, 231, 221, 0.07);
     }
 
     .grain::before {
       content: '';
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
+      z-index: 5;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-      opacity: 0.04;
+      opacity: 0.05;
     }
 
     .blood-line {
-      background: linear-gradient(90deg, transparent, #DC2626, transparent);
+      background: linear-gradient(90deg, transparent, #C8102E, transparent);
     }
 
-    .portfolio-item {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    .nav-link {
+      position: relative;
     }
 
-    .portfolio-item:hover {
-      transform: translateY(-4px);
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 1px;
+      background: #C8102E;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
     }
 
-    .portfolio-item:hover .overlay {
-      opacity: 1;
-    }
-
-    .overlay {
-      transition: opacity 0.3s;
+    .nav-link:hover::after {
+      transform: scaleX(1);
     }
 
     [x-cloak] {
       display: none !important;
     }
 
-    /* ── Scroll-triggered animation system ── */
+    /* ── Scroll animasyon sistemi ── */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -141,7 +227,7 @@
     @keyframes fadeInScale {
       from {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.6);
       }
 
       to {
@@ -158,11 +244,11 @@
       }
 
       50% {
-        filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.35));
+        filter: drop-shadow(0 0 8px rgba(200, 16, 46, 0.35));
       }
     }
 
-    [data-animate] {
+    .js [data-animate] {
       opacity: 0;
     }
 
@@ -170,13 +256,13 @@
       animation-fill-mode: forwards;
     }
 
-    .hero-anim {
+    .js .hero-anim {
       opacity: 0;
       animation-fill-mode: forwards;
     }
 
     .fade-up.animated,
-    .hero-anim.fade-up {
+    .js .hero-anim.fade-up {
       animation: fadeInUp 0.7s ease-out forwards;
     }
 
@@ -193,22 +279,111 @@
     }
 
     .logo-glow {
-      animation: pulseGlow 4s ease-in-out infinite;
+      animation: pulseGlow 5s ease-in-out infinite;
     }
 
     .social-icon-anim {
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform .3s ease, color .3s ease;
     }
 
     .social-icon-anim:hover {
-      transform: scale(1.25);
+      transform: translateY(-3px);
     }
 
-    /* Dark Mode Calendar Picker */
+    /* ── Marquee (vitrin şeridi) ── */
+    .marquee {
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 32s linear infinite;
+    }
+
+    .marquee-set {
+      display: flex;
+      align-items: center;
+      gap: 2.75rem;
+      padding-right: 2.75rem;
+      flex: none;
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── Flash motifleri: hover'da çizgi kendini çizer ── */
+    .flash-art path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .portfolio-item .flash-art {
+      color: #5C5852;
+      transition: color .45s ease;
+    }
+
+    .portfolio-item:hover .flash-art {
+      color: #C8102E;
+    }
+
+    .portfolio-item:hover .flash-art path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawline 1s cubic-bezier(.4, 0, .2, 1) forwards;
+    }
+
+    .portfolio-item:hover .flash-art path:nth-of-type(2) {
+      animation-delay: .08s;
+    }
+
+    .portfolio-item:hover .flash-art path:nth-of-type(3) {
+      animation-delay: .16s;
+    }
+
+    .portfolio-item:hover .flash-art path:nth-of-type(4) {
+      animation-delay: .24s;
+    }
+
+    .portfolio-item:hover .flash-art path:nth-of-type(5) {
+      animation-delay: .32s;
+    }
+
+    .portfolio-item:hover .flash-art path:nth-of-type(6) {
+      animation-delay: .40s;
+    }
+
+    @keyframes drawline {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .portfolio-item {
+      transition: background-color .4s ease, box-shadow .4s ease;
+      cursor: crosshair;
+    }
+
+    .portfolio-item:hover {
+      box-shadow: inset 0 0 0 1px #C8102E;
+    }
+
+    /* Karanlık tema tarih/saat ikonu */
     input[type="date"]::-webkit-calendar-picker-indicator,
     input[type="time"]::-webkit-calendar-picker-indicator {
       filter: invert(1);
       cursor: pointer;
+    }
+
+    select option {
+      background: #121214;
+      color: #EDE7DD;
     }
 
     /* ── Açılış Intro ── */
@@ -216,13 +391,13 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: #0a0a0a;
+      background: #0A0A0B;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      gap: 1.5rem;
+      gap: 2rem;
       transition: opacity 0.4s ease;
     }
 
@@ -234,13 +409,22 @@
     }
 
     #intro img.intro-logo {
-      width: 400px;
-      max-width: 70vw;
+      width: 380px;
+      max-width: 68vw;
       height: auto;
       animation: introLogoIn 1s ease forwards;
     }
 
-    /* Parçalanma canvas'ı tam ekran — parçalar hiçbir sınırda kesilmez */
+    #intro .intro-fallback {
+      display: none;
+      font-family: 'Big Shoulders Stencil', 'Bebas Neue', sans-serif;
+      font-weight: 700;
+      font-size: clamp(3rem, 12vw, 7rem);
+      letter-spacing: 0.02em;
+      color: #EDE7DD;
+      animation: introLogoIn 1s ease forwards;
+    }
+
     #intro canvas.intro-canvas {
       display: none;
       position: fixed;
@@ -251,18 +435,26 @@
     }
 
     #intro .intro-hint {
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: #666666;
+      color: #5C5852;
       animation: introHintPulse 1.6s ease-in-out infinite;
     }
 
-    /* Kısa kırmızı parlama */
+    #intro .intro-rule {
+      width: 64px;
+      height: 1px;
+      background: #C8102E;
+      transform: scaleX(0);
+      animation: introRule .9s ease .5s forwards;
+    }
+
     #intro .intro-flash {
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.45), transparent 65%);
+      background: radial-gradient(circle, rgba(200, 16, 46, 0.45), transparent 65%);
       opacity: 0;
       pointer-events: none;
     }
@@ -272,126 +464,213 @@
     }
 
     @keyframes introLogoIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to   { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.84);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     @keyframes introHintPulse {
-      0%, 100% { opacity: 0.3; }
-      50%      { opacity: 1; }
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
     }
 
     @keyframes introFlash {
-      0%   { opacity: 0; }
-      30%  { opacity: 1; }
-      100% { opacity: 0; }
+      0% {
+        opacity: 0;
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes introRule {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    /* ── Erişilebilirlik: hareket azaltma ── */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track {
+        animation: none;
+      }
+
+      .js .hero-anim,
+      .js [data-animate] {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+
+      .logo-glow,
+      .intro-hint {
+        animation: none !important;
+      }
+
+      .portfolio-item:hover .flash-art path {
+        animation: none;
+        stroke-dasharray: none;
+        stroke-dashoffset: 0;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
     }
   </style>
+  <noscript>
+    <style>
+      #intro {
+        display: none !important;
+      }
+    </style>
+  </noscript>
 </head>
 
 <body class="font-sans antialiased relative grain">
 
-  <!-- Açılış Intro Katmanı -->
+  <!-- ════ Açılış Intro (cam kırığı parçalanma) ════ -->
   <div id="intro">
     <div class="intro-stage">
       <span class="intro-flash"></span>
-      <img class="intro-logo" src="img/logo.png" alt="BegoTattoo" />
+      <img class="intro-logo" src="img/logo.png" alt="BegoTattoo"
+        onerror="this.style.display='none'; this.parentElement.querySelector('.intro-fallback').style.display='block';" />
+      <span class="intro-fallback">BEGO<span style="color:#C8102E">TATTOO</span></span>
       <canvas class="intro-canvas"></canvas>
     </div>
-    <p class="intro-hint">Dokun / Tap to enter</p>
+    <span class="intro-rule"></span>
+    <p class="intro-hint">Dokun · Tap to enter</p>
   </div>
 
+  <!-- ════ İmza: sayfa boyunca "çizilen" mürekkep hattı (lg+) ════ -->
+  <div class="hidden lg:block fixed left-6 top-0 h-screen w-8 z-40 pointer-events-none" aria-hidden="true">
+    <svg class="w-full h-full" viewBox="0 0 40 1000" preserveAspectRatio="none" fill="none">
+      <path d="M20 0 C26 120 12 230 20 350 C28 470 10 570 20 700 C30 820 14 905 20 1000" stroke="#26262A"
+        stroke-width="1" />
+      <path id="spinePath" d="M20 0 C26 120 12 230 20 350 C28 470 10 570 20 700 C30 820 14 905 20 1000" pathLength="1"
+        stroke="#C8102E" stroke-width="1.5" stroke-dasharray="1" stroke-dashoffset="1" />
+    </svg>
+  </div>
+
+  <!-- ════ Navigasyon ════ -->
   <nav class="fixed top-0 left-0 right-0 z-50 glass">
-    <div class="px-6 md:px-24 lg:px-40 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2">
-        <img src="img/logo.png" alt="BegoTattoo" class="h-20 logo-glow" />
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <img src="img/logo.png" alt="BegoTattoo" class="h-12 logo-glow"
+          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
+        <span class="hidden font-display font-bold text-2xl text-bone tracking-wide">BEGO<span
+            class="text-blood">TATTOO</span></span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-10 text-sm uppercase tracking-widest text-text-secondary">
-        <li><a href="#hakkimda" class="hover:text-text-primary transition-colors"
+      <ul class="hidden md:flex items-center gap-9 font-mono text-[11px] uppercase tracking-[0.25em] text-ash">
+        <li><a href="#hakkimda" class="nav-link hover:text-bone transition-colors"
             x-text="lang==='tr' ? 'Hakkımda' : 'About'"></a></li>
-        <li><a href="#portfolyo" class="hover:text-text-primary transition-colors"
+        <li><a href="#portfolyo" class="nav-link hover:text-bone transition-colors"
             x-text="lang==='tr' ? 'Portfolyo' : 'Portfolio'"></a></li>
-        <li><a href="#sss" class="hover:text-text-primary transition-colors" x-text="lang==='tr' ? 'SSS' : 'FAQ'"></a>
+        <li><a href="#sss" class="nav-link hover:text-bone transition-colors" x-text="lang==='tr' ? 'SSS' : 'FAQ'"></a>
         </li>
-        <li><a href="#randevu" class="hover:text-text-primary transition-colors"
+        <li><a href="#randevu" class="nav-link hover:text-bone transition-colors"
             x-text="lang==='tr' ? 'Randevu' : 'Booking'"></a></li>
       </ul>
 
-      <div class="hidden md:flex items-center gap-4">
-        <div class="flex items-center gap-1 text-xs uppercase tracking-widest">
-          <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-text-muted hover:text-text-secondary'"
+      <div class="hidden md:flex items-center gap-5">
+        <div class="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em]">
+          <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-smoke hover:text-ash'"
             class="transition-colors">TR</button>
-          <span class="text-text-muted">/</span>
-          <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-text-muted hover:text-text-secondary'"
+          <span class="text-smoke">/</span>
+          <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-smoke hover:text-ash'"
             class="transition-colors">EN</button>
         </div>
         <a href="#randevu"
-          class="bg-blood text-text-primary text-xs font-semibold px-5 py-3 uppercase tracking-widest hover:bg-red-700 transition-colors">
+          class="bg-blood text-bone font-mono text-[11px] font-medium px-5 py-2.5 uppercase tracking-[0.2em] hover:bg-bloodbright transition-colors">
           <span x-text="lang==='tr' ? 'Randevu Al' : 'Book Now'"></span>
         </a>
       </div>
 
-      <button @click="mobileMenu = !mobileMenu" class="md:hidden text-text-primary">
+      <button @click="mobileMenu = !mobileMenu" class="md:hidden text-bone p-1" aria-label="Menu">
         <svg x-show="!mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="square" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg x-show="mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg x-show="mobileMenu" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="square" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
     <div x-show="mobileMenu" x-transition x-cloak
-      class="md:hidden glass border-t border-border-dark px-6 py-6 flex flex-col gap-5">
+      class="md:hidden glass border-t border-line px-6 py-6 flex flex-col gap-5">
       <a href="#hakkimda" @click="mobileMenu=false"
-        class="text-text-secondary hover:text-text-primary uppercase tracking-widest text-sm"
+        class="text-ash hover:text-bone font-mono uppercase tracking-[0.25em] text-xs"
         x-text="lang==='tr' ? 'Hakkımda' : 'About'"></a>
       <a href="#portfolyo" @click="mobileMenu=false"
-        class="text-text-secondary hover:text-text-primary uppercase tracking-widest text-sm"
+        class="text-ash hover:text-bone font-mono uppercase tracking-[0.25em] text-xs"
         x-text="lang==='tr' ? 'Portfolyo' : 'Portfolio'"></a>
       <a href="#sss" @click="mobileMenu=false"
-        class="text-text-secondary hover:text-text-primary uppercase tracking-widest text-sm"
+        class="text-ash hover:text-bone font-mono uppercase tracking-[0.25em] text-xs"
         x-text="lang==='tr' ? 'SSS' : 'FAQ'"></a>
       <a href="#randevu" @click="mobileMenu=false"
-        class="text-text-secondary hover:text-text-primary uppercase tracking-widest text-sm"
+        class="text-ash hover:text-bone font-mono uppercase tracking-[0.25em] text-xs"
         x-text="lang==='tr' ? 'Randevu' : 'Booking'"></a>
-      <div class="flex items-center gap-3 pt-2 border-t border-border-dark">
-        <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-text-muted'"
-          class="text-xs uppercase tracking-widest">TR</button>
-        <span class="text-text-muted">/</span>
-        <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-text-muted'"
-          class="text-xs uppercase tracking-widest">EN</button>
+      <div class="flex items-center gap-3 pt-3 border-t border-line font-mono text-xs uppercase tracking-[0.2em]">
+        <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-smoke'">TR</button>
+        <span class="text-smoke">/</span>
+        <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-smoke'">EN</button>
       </div>
     </div>
   </nav>
 
-  <section
-    class="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 relative bg-cover bg-center bg-no-repeat"
-    style="background-image: url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1188,fit=crop/Yg2yoWKEZvigaK0k/instagram_b65mlzqa7ep-mjEGoV96aDtpvKLv.jpg');">
-    <div class="absolute inset-0 bg-rich-black/85 z-0"></div>
+  <!-- ════ Hero ════ -->
+  <section class="min-h-screen flex flex-col justify-end relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center grayscale contrast-125 brightness-[.38]"
+      style="background-image: url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1188,fit=crop/Yg2yoWKEZvigaK0k/instagram_b65mlzqa7ep-mjEGoV96aDtpvKLv.jpg');">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/25"></div>
+    <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-ink to-transparent"></div>
 
-    <div class="relative z-10">
-      <p class="text-blood font-serif italic text-lg md:text-xl mb-6 hero-anim fade-up" style="animation-delay: 0.1s"
-        x-text="lang==='tr' ? 'Taksim, İstanbul · 2015\'ten beri' : 'Taksim, Istanbul · Since 2015'"></p>
+    <div
+      class="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-16 pt-36 pb-20 flex-1 flex flex-col justify-center">
+      <p class="font-mono text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-smoke mb-5 hero-anim fade-up"
+        style="animation-delay: 0.05s">
+        41.0369° N — 28.9850° E · Taksim, İstanbul · est. 2015
+      </p>
 
-      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl text-text-primary leading-none mb-8 hero-anim fade-up"
-        style="animation-delay: 0.2s">
-        <span x-show="lang==='tr'">
-          İSTANBUL'UN KALBİNDE<br />
-          PROFESYONEL<br />
-          <span class="text-blood">DÖVME STÜDYOSU</span>
+      <p class="font-blackletter text-blood text-2xl md:text-3xl mb-6 hero-anim fade-up" style="animation-delay: 0.15s"
+        x-text="lang==='tr' ? 'Hikâyesi olan mürekkep' : 'Ink with story'"></p>
+
+      <h1 class="font-display font-bold text-[clamp(3.4rem,10vw,9rem)] uppercase mb-8 hero-anim fade-up"
+        style="animation-delay: 0.25s">
+        <span x-show="lang==='tr'" class="block">
+          <span class="block text-bone">İstanbul'un Kalbinde</span>
+          <span class="block txt-outline">Profesyonel</span>
+          <span class="block text-blood">Dövme Stüdyosu</span>
         </span>
-        <span x-show="lang==='en'" x-cloak>
-          PROFESSIONAL<br />
-          TATTOO STUDIO<br />
-          <span class="text-blood">IN THE HEART OF ISTANBUL</span>
+        <span x-show="lang==='en'" x-cloak class="block">
+          <span class="block text-bone">Professional</span>
+          <span class="block text-blood">Tattoo Studio</span>
+          <span class="block txt-outline">In the Heart of İstanbul</span>
         </span>
       </h1>
 
-      <p class="text-text-secondary text-base md:text-lg max-w-2xl mb-12 leading-relaxed hero-anim fade-up"
-        style="animation-delay: 0.5s">
-        <span x-show="lang==='tr'">Bego Tattoo Stüdyo'da her dövme, bedeninize işlenen özgün bir hikayedir. 2015'ten
+      <p class="text-ash text-base md:text-lg max-w-2xl mb-12 leading-relaxed hero-anim fade-up"
+        style="animation-delay: 0.45s">
+        <span x-show="lang==='tr'">Bego Tattoo Stüdyo'da her dövme, bedeninize işlenen özgün bir hikâyedir. 2015'ten
           bugüne uzanan profesyonel tecrübemizle; Taksim, Beyoğlu, Şişli, Mecidiyeköy, Beşiktaş ve Kadıköy başta olmak
           üzere tüm İstanbul'a hijyenik ortamda, kişiye özel dövme tasarımı ve kusursuz işçilik sunuyoruz.</span>
         <span x-show="lang==='en'" x-cloak>At Bego Tattoo Studio, every tattoo is a unique story etched into your body.
@@ -400,334 +679,783 @@
           Kadıköy.</span>
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 mb-4 hero-anim fade-up" style="animation-delay: 0.8s">
+      <div class="flex flex-col sm:flex-row gap-4 hero-anim fade-up" style="animation-delay: 0.65s">
         <a href="#randevu"
-          class="bg-blood text-text-primary font-semibold px-8 py-4 text-sm uppercase tracking-widest hover:bg-red-700 transition-colors text-center border border-blood">
+          class="bg-blood text-bone font-mono text-xs font-medium px-9 py-4 uppercase tracking-[0.25em] hover:bg-bloodbright hover:-translate-y-0.5 transition-all duration-300 text-center">
           <span x-text="lang==='tr' ? 'Randevu Al' : 'Book Now'"></span>
         </a>
         <a href="#portfolyo"
-          class="glass border border-border-dark text-text-primary px-8 py-4 text-sm uppercase tracking-widest hover:border-text-secondary transition-colors text-center">
+          class="border border-line text-bone font-mono text-xs px-9 py-4 uppercase tracking-[0.25em] hover:border-bone hover:-translate-y-0.5 transition-all duration-300 text-center">
           <span x-text="lang==='tr' ? 'Çalışmaları Gör' : 'View Work'"></span>
         </a>
       </div>
+    </div>
 
-      <div class="blood-line h-px w-32 mt-20"></div>
+    <!-- Vitrin şeridi -->
+    <div class="marquee relative z-10 border-y border-line py-4 select-none" aria-hidden="true">
+      <div class="marquee-track font-mono text-[11px] tracking-[0.4em] uppercase text-smoke">
+        <div class="marquee-set">
+          <span>Blackwork</span><span class="text-blood">✕</span>
+          <span>Fine Line</span><span class="text-blood">✕</span>
+          <span>Neo Traditional</span><span class="text-blood">✕</span>
+          <span>Minimalist</span><span class="text-blood">✕</span>
+          <span>Black &amp; Grey</span><span class="text-blood">✕</span>
+          <span>Color</span><span class="text-blood">✕</span>
+          <span>Custom Designs</span><span class="text-blood">✕</span>
+        </div>
+        <div class="marquee-set">
+          <span>Blackwork</span><span class="text-blood">✕</span>
+          <span>Fine Line</span><span class="text-blood">✕</span>
+          <span>Neo Traditional</span><span class="text-blood">✕</span>
+          <span>Minimalist</span><span class="text-blood">✕</span>
+          <span>Black &amp; Grey</span><span class="text-blood">✕</span>
+          <span>Color</span><span class="text-blood">✕</span>
+          <span>Custom Designs</span><span class="text-blood">✕</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="hakkimda" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 bg-off-black">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="fade-left" data-animate>
-        <img
-          src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1188,fit=crop/Yg2yoWKEZvigaK0k/instagram_b65mlzqa7ep-mjEGoV96aDtpvKLv.jpg"
-          alt="Bego" class="w-full aspect-[3/4] object-cover border border-border-dark" />
-      </div>
-      <div>
-        <div x-show="lang==='tr'">
-          <div class="fade-right" data-animate style="animation-delay: 0.2s">
-            <h2 class="font-display text-4xl md:text-5xl text-text-primary leading-none mb-3">
-              Heybetli <span class="text-blood">Bego</span> Kızgın
-            </h2>
-            <p class="font-serif italic text-blood text-lg mb-6">Kurucu Dövme Sanatçısı</p>
-          </div>
-          <p class="text-text-secondary leading-relaxed fade-right" data-animate style="animation-delay: 0.4s">
-            2015 yılından bu yana profesyonel olarak icra ettiğim dövme sanatında, size özel tasarımlar üretiyorum.
-            Taksim merkezli stüdyomuz, sadece bulunduğu bölgeye değil; Sarıyer'den Kadıköy'e, Şişli'den Beşiktaş'a kadar
-            İstanbul'da kaliteli dövme arayan herkesin ortak buluşma noktasıdır. Detaylara olan takıntım ve grafik
-            tasarım geçmişim sayesinde, hayalinizdeki o mükemmel çizgiyi bedeninize taşıyoruz.
+  <!-- ════ Hakkımda ════ -->
+  <section id="hakkimda" class="bg-coal border-b border-line">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <div class="fade-left relative" data-animate>
+          <!-- Baskı/stencil kesim işaretleri -->
+          <span class="absolute -top-3 -left-3 w-6 h-6 border-t border-l border-blood" aria-hidden="true"></span>
+          <span class="absolute -top-3 -right-3 w-6 h-6 border-t border-r border-blood" aria-hidden="true"></span>
+          <span class="absolute -bottom-3 -left-3 w-6 h-6 border-b border-l border-blood" aria-hidden="true"></span>
+          <span class="absolute -bottom-3 -right-3 w-6 h-6 border-b border-r border-blood" aria-hidden="true"></span>
+          <img
+            src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1188,fit=crop/Yg2yoWKEZvigaK0k/instagram_b65mlzqa7ep-mjEGoV96aDtpvKLv.jpg"
+            alt="Bego — kurucu dövme sanatçısı"
+            class="w-full aspect-[3/4] object-cover border border-line grayscale hover:grayscale-0 transition-[filter] duration-700" />
+          <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke mt-4">
+            Fig. 01 — <span x-text="lang==='tr' ? 'Sanatçı' : 'The Artist'"></span>
           </p>
         </div>
-        <div x-show="lang==='en'" x-cloak>
-          <div class="fade-right" data-animate style="animation-delay: 0.2s">
-            <h2 class="font-display text-4xl md:text-5xl text-text-primary leading-none mb-3">
-              Heybetli <span class="text-blood">Bego</span> Kızgın
-            </h2>
-            <p class="font-serif italic text-blood text-lg mb-6">Founder &amp; Tattoo Artist</p>
-          </div>
-          <p class="text-text-secondary leading-relaxed fade-right" data-animate style="animation-delay: 0.4s">
-            Since 2015, I have been professionally practicing the art of tattooing, creating custom designs just for
-            you. Our Taksim-based studio is a meeting point for everyone in Istanbul seeking quality tattoos — from
-            Sarıyer to Kadıköy, Şişli to Beşiktaş. Thanks to my obsession with detail and graphic design background, we
-            bring the perfect lines of your dreams onto your body.
+
+        <div>
+          <p class="font-blackletter text-blood text-2xl mb-5 fade-right" data-animate
+            x-text="lang==='tr' ? 'Sanatçı' : 'The Artist'"></p>
+
+          <h2 class="font-display font-bold text-5xl md:text-6xl uppercase text-bone mb-3 fade-right" data-animate
+            style="animation-delay: 0.1s">
+            Heybetli <span class="text-blood">Bego</span> Kızgın
+          </h2>
+          <p class="font-mono text-[11px] tracking-[0.3em] uppercase text-ash mb-8 fade-right" data-animate
+            style="animation-delay: 0.2s" x-text="lang==='tr' ? 'Kurucu Dövme Sanatçısı' : 'Founder & Tattoo Artist'">
           </p>
+
+          <p class="text-ash leading-relaxed fade-right" data-animate style="animation-delay: 0.3s">
+            <span x-show="lang==='tr'">2015 yılından bu yana profesyonel olarak icra ettiğim dövme sanatında, size özel
+              tasarımlar üretiyorum. Taksim merkezli stüdyomuz, sadece bulunduğu bölgeye değil; Sarıyer'den Kadıköy'e,
+              Şişli'den Beşiktaş'a kadar İstanbul'da kaliteli dövme arayan herkesin ortak buluşma noktasıdır. Detaylara
+              olan takıntım ve grafik tasarım geçmişim sayesinde, hayalinizdeki o mükemmel çizgiyi bedeninize
+              taşıyoruz.</span>
+            <span x-show="lang==='en'" x-cloak>Since 2015, I have been professionally practicing the art of tattooing,
+              creating custom designs just for you. Our Taksim-based studio is a meeting point for everyone in Istanbul
+              seeking quality tattoos — from Sarıyer to Kadıköy, Şişli to Beşiktaş. Thanks to my obsession with detail
+              and graphic design background, we bring the perfect lines of your dreams onto your body.</span>
+          </p>
+
+          <!-- Künye -->
+          <dl class="mt-10 border-t border-line fade-right" data-animate style="animation-delay: 0.4s">
+            <div
+              class="flex items-center justify-between gap-6 py-4 border-b border-line font-mono text-[11px] tracking-[0.2em] uppercase">
+              <dt class="text-smoke" x-text="lang==='tr' ? 'Deneyim' : 'Experience'"></dt>
+              <dd class="text-bone text-right"
+                x-text="lang==='tr' ? '2015\'ten beri — 10+ yıl' : 'Since 2015 — 10+ years'"></dd>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 py-4 border-b border-line font-mono text-[11px] tracking-[0.2em] uppercase">
+              <dt class="text-smoke" x-text="lang==='tr' ? 'Konum' : 'Location'"></dt>
+              <dd class="text-bone text-right">Taksim · Beyoğlu</dd>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 py-4 border-b border-line font-mono text-[11px] tracking-[0.2em] uppercase">
+              <dt class="text-smoke" x-text="lang==='tr' ? 'Uzmanlık' : 'Focus'"></dt>
+              <dd class="text-bone text-right">Blackwork · Fine Line · Neo-Trad</dd>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 py-4 border-b border-line font-mono text-[11px] tracking-[0.2em] uppercase">
+              <dt class="text-smoke" x-text="lang==='tr' ? 'Hijyen' : 'Hygiene'"></dt>
+              <dd class="text-bone text-right"
+                x-text="lang==='tr' ? 'Tek kullanımlık ekipman' : 'Single-use equipment'"></dd>
+            </div>
+          </dl>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portfolyo" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 bg-rich-black relative">
-    <div class="mb-16">
-      <p class="text-blood font-serif italic text-lg mb-4" x-text="lang==='tr' ? 'Portfolyo' : 'Portfolio'"></p>
-      <h2 class="font-display text-5xl md:text-7xl text-text-primary leading-none mb-8">
-        <span x-show="lang==='tr'">SEÇİLMİŞ <span class="text-blood">ÇALIŞMALAR</span></span>
-        <span x-show="lang==='en'" x-cloak>SELECTED <span class="text-blood">WORK</span></span>
-      </h2>
-
-      <div class="flex flex-wrap gap-3">
-        <template x-for="cat in ['all', 'blackwork', 'color', 'neotrad', 'minimalist', 'designs', 'blackandgray']"
-          :key="cat">
-          <button @click="filter = cat" :class="filter === cat 
-              ? 'bg-blood text-text-primary shadow-[0_0_15px_rgba(220,38,38,0.4)] scale-105' 
-              : 'bg-card border border-border-dark text-text-secondary hover:border-blood hover:text-blood'"
-            class="px-6 py-3 text-xs uppercase tracking-widest font-semibold transition-all duration-300">
-            <span x-text="cat === 'all' ? (lang === 'tr' ? 'Tümü' : 'All') : cat"></span>
-          </button>
-        </template>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
-      <template x-for="i in 12" :key="i">
-        <div class="portfolio-item aspect-[3/4] bg-card relative overflow-hidden cursor-pointer"
-          x-data="{ cat: ['blackwork', 'color', 'neotrad', 'minimalist', 'designs', 'blackandgray'][i % 6] }"
-          x-show="filter==='all' || filter===cat">
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-card to-off-black flex items-center justify-center border border-border-dark">
-            <span class="font-display text-text-muted text-xs uppercase tracking-widest" x-text="cat"></span>
-          </div>
-          <div class="overlay absolute inset-0 bg-blood/90 opacity-0 flex flex-col items-center justify-center p-4">
-            <span class="font-display text-text-primary text-xl tracking-widest" x-text="cat.toUpperCase()"></span>
-            <span class="text-text-primary text-xs mt-2"
-              x-text="lang==='tr' ? 'Detay için tıkla' : 'Click for detail'"></span>
-          </div>
+  <!-- ════ Süreç ════ -->
+  <section id="surec" class="bg-ink border-b border-line">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-24">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14 fade-up" data-animate>
+        <div>
+          <p class="font-blackletter text-blood text-2xl mb-4"
+            x-text="lang==='tr' ? 'İğne değmeden önce' : 'Before the needle'"></p>
+          <h2 class="font-display font-bold text-5xl md:text-6xl uppercase text-bone">
+            <span x-show="lang==='tr'">Süreç</span>
+            <span x-show="lang==='en'" x-cloak>The Process</span>
+          </h2>
         </div>
-      </template>
-    </div>
+        <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke"
+          x-text="lang==='tr' ? '5 adım — tek hikâye' : '5 steps — one story'"></p>
+      </div>
 
-    <div class="flex flex-col sm:flex-row justify-center gap-6 mt-20 fade-up" data-animate>
-      <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
-        class="flex items-center justify-center gap-3 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white px-8 py-4 uppercase tracking-widest text-sm font-semibold hover:scale-105 hover:shadow-[0_0_25px_rgba(220,39,67,0.5)] transition-all duration-300">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.34 2.69.93 3.36.62 4.15.32 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.93 19.85.62c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
-        </svg>
-        <span x-text="lang==='tr' ? 'Daha Fazlası Instagram\'da' : 'More on Instagram'"></span>
-      </a>
-      <a href="https://tr.pinterest.com/begotattx" target="_blank" rel="noopener"
-        class="flex items-center justify-center gap-3 bg-[#E60023] text-white px-8 py-4 uppercase tracking-widest text-sm font-semibold hover:scale-105 hover:shadow-[0_0_25px_rgba(230,0,35,0.5)] transition-all duration-300">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
-        </svg>
-        <span x-text="lang==='tr' ? 'Pinterest Panolarım' : 'My Pinterest Boards'"></span>
-      </a>
+      <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-line border border-line">
+        <li class="bg-ink p-7 fade-up" data-animate>
+          <span class="font-mono text-[11px] tracking-[0.25em] text-blood">01</span>
+          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
+            x-text="lang==='tr' ? 'Danışma' : 'Consultation'"></h3>
+          <p class="text-sm text-ash leading-relaxed"
+            x-text="lang==='tr' ? 'Fikrini, hikâyeni ve vücut bölgesini konuşuruz. Ücretsizdir.' : 'We talk through your idea, story and placement. Always free.'">
+          </p>
+        </li>
+        <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.1s">
+          <span class="font-mono text-[11px] tracking-[0.25em] text-blood">02</span>
+          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
+            x-text="lang==='tr' ? 'Tasarım' : 'Design'"></h3>
+          <p class="text-sm text-ash leading-relaxed"
+            x-text="lang==='tr' ? 'Sana özel çizim; revizyonlarla birlikte netleşir.' : 'A custom drawing, refined together with revisions.'">
+          </p>
+        </li>
+        <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.2s">
+          <span class="font-mono text-[11px] tracking-[0.25em] text-stencil">03</span>
+          <h3 class="font-display font-bold text-2xl uppercase text-stencil mt-4 mb-3">Stencil</h3>
+          <p class="text-sm text-ash leading-relaxed"
+            x-text="lang==='tr' ? 'Tasarım cilde mor transferle aktarılır. Son kontrol sende.' : 'The design is transferred to skin in violet. Final check is yours.'">
+          </p>
+        </li>
+        <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.3s">
+          <span class="font-mono text-[11px] tracking-[0.25em] text-blood">04</span>
+          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
+            x-text="lang==='tr' ? 'Seans' : 'Session'"></h3>
+          <p class="text-sm text-ash leading-relaxed"
+            x-text="lang==='tr' ? 'Steril ortamda, ritmi birlikte kurarız. Mola hakkın saklı.' : 'A sterile setup, a pace we set together. Breaks whenever you need.'">
+          </p>
+        </li>
+        <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.4s">
+          <span class="font-mono text-[11px] tracking-[0.25em] text-blood">05</span>
+          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
+            x-text="lang==='tr' ? 'Bakım' : 'Aftercare'"></h3>
+          <p class="text-sm text-ash leading-relaxed"
+            x-text="lang==='tr' ? 'Yazılı bakım talimatı + iyileşme boyunca takip.' : 'Written aftercare instructions + follow-up through healing.'">
+          </p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section id="sss" class="px-6 md:px-12 lg:px-20 py-24 bg-off-black border-t border-border-dark">
-    <div class="max-w-4xl mx-auto fade-up" data-animate>
-      <h2 class="font-display text-4xl md:text-5xl text-text-primary text-center mb-12">
-        <span x-show="lang==='tr'">SIKÇA SORULAN <span class="text-blood">SORULAR</span></span>
-        <span x-show="lang==='en'" x-cloak>FREQUENTLY ASKED <span class="text-blood">QUESTIONS</span></span>
-      </h2>
-
-      <div class="flex flex-col gap-4">
-        <div x-data="{ expanded: false }" class="bg-card border border-border-dark">
-          <button @click="expanded = !expanded"
-            class="w-full flex justify-between items-center p-6 text-left hover:bg-rich-black transition-colors focus:outline-none focus:ring-1 focus:ring-blood">
-            <span class="font-semibold text-text-primary uppercase tracking-wider text-sm"
-              x-text="lang==='tr' ? 'Soru 1 (Başlık buraya gelecek)' : 'Question 1 (Title goes here)'"></span>
-            <span x-text="expanded ? '−' : '＋'"
-              class="text-blood text-2xl font-display transition-transform duration-300"
-              :class="expanded ? 'rotate-180' : ''"></span>
-          </button>
-          <div x-show="expanded" x-collapse x-cloak
-            class="p-6 pt-0 border-t border-border-dark text-text-secondary text-sm leading-relaxed mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </div>
+  <!-- ════ Portfolyo ════ -->
+  <section id="portfolyo" class="bg-ink border-b border-line">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+      <div class="mb-14">
+        <p class="font-blackletter text-blood text-2xl mb-4"
+          x-text="lang==='tr' ? 'Mürekkep arşivi' : 'The ink archive'"></p>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <h2 class="font-display font-bold text-[clamp(3rem,7vw,5.5rem)] uppercase leading-none">
+            <span x-show="lang==='tr'"><span class="text-bone">Seçilmiş</span> <span
+                class="text-blood">Çalışmalar</span></span>
+            <span x-show="lang==='en'" x-cloak><span class="text-bone">Selected</span> <span
+                class="text-blood">Work</span></span>
+          </h2>
+          <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke"
+            x-text="lang==='tr' ? '12 çalışma — 6 stil' : '12 pieces — 6 styles'"></p>
         </div>
 
-        <div x-data="{ expanded: false }" class="bg-card border border-border-dark">
-          <button @click="expanded = !expanded"
-            class="w-full flex justify-between items-center p-6 text-left hover:bg-rich-black transition-colors focus:outline-none focus:ring-1 focus:ring-blood">
-            <span class="font-semibold text-text-primary uppercase tracking-wider text-sm"
-              x-text="lang==='tr' ? 'Soru 2 (Başlık buraya gelecek)' : 'Question 2 (Title goes here)'"></span>
-            <span x-text="expanded ? '−' : '＋'"
-              class="text-blood text-2xl font-display transition-transform duration-300"
-              :class="expanded ? 'rotate-180' : ''"></span>
-          </button>
-          <div x-show="expanded" x-collapse x-cloak
-            class="p-6 pt-0 border-t border-border-dark text-text-secondary text-sm leading-relaxed mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam.
-          </div>
-        </div>
-
-        <div x-data="{ expanded: false }" class="bg-card border border-border-dark">
-          <button @click="expanded = !expanded"
-            class="w-full flex justify-between items-center p-6 text-left hover:bg-rich-black transition-colors focus:outline-none focus:ring-1 focus:ring-blood">
-            <span class="font-semibold text-text-primary uppercase tracking-wider text-sm"
-              x-text="lang==='tr' ? 'Soru 3 (Başlık buraya gelecek)' : 'Question 3 (Title goes here)'"></span>
-            <span x-text="expanded ? '−' : '＋'"
-              class="text-blood text-2xl font-display transition-transform duration-300"
-              :class="expanded ? 'rotate-180' : ''"></span>
-          </button>
-          <div x-show="expanded" x-collapse x-cloak
-            class="p-6 pt-0 border-t border-border-dark text-text-secondary text-sm leading-relaxed mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="randevu" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 bg-rich-black border-t border-border-dark">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-      <div>
-        <p class="text-blood font-serif italic text-lg mb-4" x-text="lang==='tr' ? 'Randevu' : 'Booking'"></p>
-        <h2 class="font-display text-5xl md:text-6xl text-text-primary leading-none mb-8">
-          <span x-show="lang==='tr'">BİR <span class="text-blood">HİKÂYE</span> ANLAT</span>
-          <span x-show="lang==='en'" x-cloak>TELL A <span class="text-blood">STORY</span></span>
-        </h2>
-        <p class="text-text-secondary leading-relaxed mb-12">
-          <span x-show="lang==='tr'">Fikrini, ölçünü, hayalini paylaş. 48 saat içinde dönüş yapıyorum. WhatsApp'tan da
-            yazabilirsin.</span>
-          <span x-show="lang==='en'" x-cloak>Share your idea, size, vision. I respond within 48 hours. WhatsApp also
-            works.</span>
-        </p>
-
-        <div class="flex flex-col gap-5 text-sm">
-          <div class="flex items-center gap-4 group">
-            <span class="text-blood text-xl transition-transform group-hover:scale-110">✉</span>
-            <a href="mailto:info@begotattoo.com"
-              class="text-text-primary hover:text-blood transition-colors">info@begotattoo.com</a>
-          </div>
-          <div class="flex items-center gap-4 group">
-            <span class="text-blood text-xl transition-transform group-hover:scale-110">📞</span>
-            <a href="tel:+905424590699" class="text-text-primary hover:text-blood transition-colors">+90 542 459
-              0699</a>
-          </div>
-          <div class="flex items-center gap-4 group">
-            <span class="text-blood text-xl transition-transform group-hover:scale-110">📍</span>
-            <span class="text-text-primary">Beyoğlu / Istanbul, Turkey</span>
-          </div>
+        <div class="flex flex-wrap gap-2">
+          <template x-for="cat in ['all', 'blackwork', 'color', 'neotrad', 'minimalist', 'designs', 'blackandgray']"
+            :key="cat">
+            <button @click="filter = cat" :class="filter === cat
+                ? 'border-blood text-blood bg-blood/10'
+                : 'border-line text-ash hover:border-smoke hover:text-bone'"
+              class="border px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.25em] transition-all duration-300">
+              <span
+                x-text="cat === 'all' ? (lang === 'tr' ? 'Tümü' : 'All') : ({blackwork:'Blackwork',color:'Color',neotrad:'Neo-Trad',minimalist:'Minimalist',designs:'Designs',blackandgray:'Black & Gray'})[cat]"></span>
+            </button>
+          </template>
         </div>
       </div>
 
-      <form class="flex flex-col gap-4">
-        <input type="text" :placeholder="lang==='tr' ? 'Adınız' : 'Your name'"
-          class="bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood placeholder-text-muted transition-colors" />
+      <!-- Flash sheet ızgarası -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-line border border-line">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="email" :placeholder="lang==='tr' ? 'E-posta' : 'Email'"
-            class="bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood placeholder-text-muted transition-colors" />
-          <input type="tel" :placeholder="lang==='tr' ? 'Telefon (opsiyonel)' : 'Phone (optional)'"
-            class="bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood placeholder-text-muted transition-colors" />
+        <!-- 01 · blackwork · hançer -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='blackwork'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            01</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path d="M32 6 L37 17 L34 45 L32 51 L30 45 L27 17 Z" pathLength="1" />
+            <path d="M32 13 V42" pathLength="1" />
+            <path d="M19 51 H45" pathLength="1" />
+            <path d="M30 51 V63 M34 51 V63" pathLength="1" />
+            <path d="M30 55 H34 M30 59 H34" pathLength="1" />
+            <path d="M28 67 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0" pathLength="1" />
+          </svg>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Blackwork</span>
         </div>
 
-        <select
-          class="bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood transition-colors appearance-none">
-          <option x-text="lang==='tr' ? 'Tarz seç' : 'Select style'"></option>
-          <option>Blackwork</option>
-          <option>Color</option>
-          <option>NeoTrad</option>
-          <option>Minimalist</option>
-          <option>Designs</option>
-          <option>BlackAndGray</option>
-          <option x-text="lang==='tr' ? 'Emin değilim' : 'Not sure'"></option>
-        </select>
+        <!-- 02 · color · gül -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='color'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            02</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path d="M35 33 a4 4 0 1 0 -4 4" pathLength="1" />
+            <path d="M40 30 a9 9 0 1 0 -9 9" pathLength="1" />
+            <path d="M45 28 a14 14 0 1 0 -14 14" pathLength="1" />
+            <path d="M31 47 V72" pathLength="1" />
+            <path d="M31 58 Q20 57 17 49 Q27 46 31 58" pathLength="1" />
+            <path d="M31 65 Q42 63 45 55 Q35 52 31 65" pathLength="1" />
+          </svg>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Color</span>
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="relative">
-            <label class="absolute -top-2 left-3 bg-card px-1 text-[10px] text-text-muted uppercase tracking-widest"
-              x-text="lang==='tr' ? 'Tarih' : 'Date'"></label>
-            <input type="date"
-              class="w-full bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood transition-colors [color-scheme:dark]" />
+        <!-- 03 · neotrad · yılan -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='neotrad'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            03</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path d="M15 71 C5 60 28 54 36 46 C46 38 14 32 24 22 C29 16 39 15 43 20" pathLength="1" />
+            <path d="M43 20 q6 -3 8 3 q2 6 -5 7 q-6 1 -7 -5" pathLength="1" />
+            <path d="M51 25 L58 28 M51 25 L57 23" pathLength="1" />
+            <path d="M46.5 21.5 l0.01 0" pathLength="1" />
+            <path d="M15 71 q-5 2 -7 6" pathLength="1" />
+          </svg>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Neo-Trad</span>
+        </div>
+
+        <!-- 04 · minimalist · hilal -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='minimalist'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            04</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path d="M41 13 a23 23 0 1 0 0 46 a18 18 0 1 1 0 -46" pathLength="1" />
+            <path d="M51 24 v6 M48 27 h6" pathLength="1" />
+            <path d="M49 50 v4 M47 52 h4" pathLength="1" />
+            <path d="M44 38 l0.01 0" pathLength="1" />
+          </svg>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Minimalist</span>
+        </div>
+
+        <!-- 05 · designs · göz -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='designs'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            05</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path d="M9 40 Q32 19 55 40 Q32 61 9 40 Z" pathLength="1" />
+            <path d="M32 31 a9 9 0 1 0 0.02 0" pathLength="1" />
+            <path d="M32 37 a3.5 3.5 0 1 0 0.02 0" pathLength="1" />
+            <path d="M32 13 v6 M15 20 l4 5 M49 20 l-4 5" pathLength="1" />
+            <path d="M15 60 l4 -5 M49 60 l-4 -5" pathLength="1" />
+          </svg>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Designs</span>
+        </div>
+
+        <!-- 06 · blackandgray · kuru kafa -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='blackandgray'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            06</span>
+          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <path
+              d="M32 9 C19 9 12 18 12 28 C12 35 16 39 20 42 L20 50 C20 55 25 57 32 57 C39 57 44 55 44 50 L44 42 C48 39 52 35 52 28 C52 18 45 9 32 9 Z"
+              pathLength="1" />
+            <path d="M24 31 a4.5 4.5 0 1 0 0.02 0" pathLength="1" />
+            <path d="M40 31 a4.5 4.5 0 1 0 0.02 0" pathLength="1" />
+            <path d="M32 38 L29 44 L35 44 Z" pathLength="1" />
+            <path d="M27 57 v8 M32 57 v9 M37 57 v8" pathLength="1" />
+          </svg>
+          <span class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Black
+            &amp; Gray</span>
+        </div>
+
+        <!-- 07 · blackwork · hançer (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='blackwork'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            07</span>
+          <div class="rotate-[8deg]">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M32 6 L37 17 L34 45 L32 51 L30 45 L27 17 Z" pathLength="1" />
+              <path d="M32 13 V42" pathLength="1" />
+              <path d="M19 51 H45" pathLength="1" />
+              <path d="M30 51 V63 M34 51 V63" pathLength="1" />
+              <path d="M30 55 H34 M30 59 H34" pathLength="1" />
+              <path d="M28 67 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0" pathLength="1" />
+            </svg>
           </div>
-          <div class="relative">
-            <label class="absolute -top-2 left-3 bg-card px-1 text-[10px] text-text-muted uppercase tracking-widest"
-              x-text="lang==='tr' ? 'Saat' : 'Time'"></label>
-            <input type="time"
-              class="w-full bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood transition-colors [color-scheme:dark]" />
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Blackwork</span>
+        </div>
+
+        <!-- 08 · color · gül (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='color'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            08</span>
+          <div class="-rotate-6 -scale-x-100">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M35 33 a4 4 0 1 0 -4 4" pathLength="1" />
+              <path d="M40 30 a9 9 0 1 0 -9 9" pathLength="1" />
+              <path d="M45 28 a14 14 0 1 0 -14 14" pathLength="1" />
+              <path d="M31 47 V72" pathLength="1" />
+              <path d="M31 58 Q20 57 17 49 Q27 46 31 58" pathLength="1" />
+              <path d="M31 65 Q42 63 45 55 Q35 52 31 65" pathLength="1" />
+            </svg>
           </div>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Color</span>
         </div>
 
-        <textarea rows="4"
-          :placeholder="lang==='tr' ? 'Fikrini anlat — boyut, vücut bölgesi, ilham...' : 'Describe your idea — size, body part, inspiration...'"
-          class="bg-card border border-border-dark text-text-primary px-4 py-4 text-sm focus:outline-none focus:border-blood focus:ring-1 focus:ring-blood placeholder-text-muted resize-none transition-colors mt-2"></textarea>
-
-        <button type="submit"
-          class="bg-blood text-text-primary font-semibold px-8 py-4 text-sm uppercase tracking-widest hover:bg-red-700 hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all duration-300 mt-2">
-          <span x-text="lang==='tr' ? 'Gönder' : 'Send'"></span>
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="border-t border-border-dark bg-off-black px-6 md:px-12 lg:px-20 py-12">
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-      <div>
-        <div class="flex items-center gap-2 mb-3">
-          <img src="img/logo.png" alt="BegoTattoo" class="h-16" />
+        <!-- 09 · neotrad · yılan (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='neotrad'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            09</span>
+          <div class="-scale-x-100 rotate-3">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M15 71 C5 60 28 54 36 46 C46 38 14 32 24 22 C29 16 39 15 43 20" pathLength="1" />
+              <path d="M43 20 q6 -3 8 3 q2 6 -5 7 q-6 1 -7 -5" pathLength="1" />
+              <path d="M51 25 L58 28 M51 25 L57 23" pathLength="1" />
+              <path d="M46.5 21.5 l0.01 0" pathLength="1" />
+              <path d="M15 71 q-5 2 -7 6" pathLength="1" />
+            </svg>
+          </div>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Neo-Trad</span>
         </div>
-        <p class="text-text-muted text-sm font-serif italic"
-          x-text="lang==='tr' ? 'Hikâyesi olan mürekkep · İstanbul' : 'Ink with story · Istanbul'"></p>
+
+        <!-- 10 · minimalist · hilal (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='minimalist'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            10</span>
+          <div class="-scale-x-100 -rotate-6">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M41 13 a23 23 0 1 0 0 46 a18 18 0 1 1 0 -46" pathLength="1" />
+              <path d="M51 24 v6 M48 27 h6" pathLength="1" />
+              <path d="M49 50 v4 M47 52 h4" pathLength="1" />
+              <path d="M44 38 l0.01 0" pathLength="1" />
+            </svg>
+          </div>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Minimalist</span>
+        </div>
+
+        <!-- 11 · designs · göz (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='designs'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            11</span>
+          <div class="rotate-[5deg]">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M9 40 Q32 19 55 40 Q32 61 9 40 Z" pathLength="1" />
+              <path d="M32 31 a9 9 0 1 0 0.02 0" pathLength="1" />
+              <path d="M32 37 a3.5 3.5 0 1 0 0.02 0" pathLength="1" />
+              <path d="M32 13 v6 M15 20 l4 5 M49 20 l-4 5" pathLength="1" />
+              <path d="M15 60 l4 -5 M49 60 l-4 -5" pathLength="1" />
+            </svg>
+          </div>
+          <span
+            class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Designs</span>
+        </div>
+
+        <!-- 12 · blackandgray · kuru kafa (varyant) -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
+          x-show="filter==='all' || filter==='blackandgray'">
+          <span
+            class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+            12</span>
+          <div class="-rotate-3">
+            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path
+                d="M32 9 C19 9 12 18 12 28 C12 35 16 39 20 42 L20 50 C20 55 25 57 32 57 C39 57 44 55 44 50 L44 42 C48 39 52 35 52 28 C52 18 45 9 32 9 Z"
+                pathLength="1" />
+              <path d="M24 31 a4.5 4.5 0 1 0 0.02 0" pathLength="1" />
+              <path d="M40 31 a4.5 4.5 0 1 0 0.02 0" pathLength="1" />
+              <path d="M32 38 L29 44 L35 44 Z" pathLength="1" />
+              <path d="M27 57 v8 M32 57 v9 M37 57 v8" pathLength="1" />
+            </svg>
+          </div>
+          <span class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Black
+            &amp; Gray</span>
+        </div>
       </div>
 
-      <div class="flex items-center gap-5">
+      <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke mt-6"
+        x-text="lang==='tr' ? '* Flash motifler temsilidir — gerçek çalışmalar Instagram\'da' : '* Flash motifs are placeholders — real work lives on Instagram'">
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-16 fade-up" data-animate>
         <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
-          class="text-text-secondary hover:text-blood social-icon-anim fade-scale" data-animate
-          style="animation-delay: 0s" aria-label="Instagram">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          class="flex items-center justify-center gap-3 border border-line text-bone px-8 py-4 font-mono text-[11px] uppercase tracking-[0.25em] hover:border-blood hover:text-blood hover:-translate-y-0.5 transition-all duration-300">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path
               d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.34 2.69.93 3.36.62 4.15.32 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.93 19.85.62c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
           </svg>
+          <span x-text="lang==='tr' ? 'Daha fazlası Instagram\'da' : 'More on Instagram'"></span>
         </a>
         <a href="https://tr.pinterest.com/begotattx" target="_blank" rel="noopener"
-          class="text-text-secondary hover:text-blood social-icon-anim fade-scale" data-animate
-          style="animation-delay: 0.1s" aria-label="Pinterest">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          class="flex items-center justify-center gap-3 border border-line text-bone px-8 py-4 font-mono text-[11px] uppercase tracking-[0.25em] hover:border-blood hover:text-blood hover:-translate-y-0.5 transition-all duration-300">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path
               d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
           </svg>
-        </a>
-        <a href="https://x.com/codeBego" target="_blank" rel="noopener"
-          class="text-text-secondary hover:text-blood social-icon-anim fade-scale" data-animate
-          style="animation-delay: 0.2s" aria-label="X">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100066284982782" target="_blank" rel="noopener"
-          class="text-text-secondary hover:text-blood social-icon-anim fade-scale" data-animate
-          style="animation-delay: 0.3s" aria-label="Facebook">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-          </svg>
-        </a>
-        <a href="https://www.tiktok.com/@begotattx" target="_blank" rel="noopener"
-          class="text-text-secondary hover:text-blood social-icon-anim fade-scale" data-animate
-          style="animation-delay: 0.4s" aria-label="TikTok">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z" />
-          </svg>
+          <span x-text="lang==='tr' ? 'Pinterest panolarım' : 'My Pinterest boards'"></span>
         </a>
       </div>
     </div>
+  </section>
 
-    <div
-      class="pt-8 border-t border-border-dark flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-      <p class="text-text-muted text-xs uppercase tracking-widest">© 2026 BegoTattoo. <span
-          x-text="lang==='tr' ? 'Tüm hakları saklıdır.' : 'All rights reserved.'"></span></p>
-      <p class="text-text-muted text-xs italic">Crafted with ink & code · CodeBego Architecture</p>
+  <!-- ════ SSS ════ -->
+  <section id="sss" class="bg-coal border-b border-line">
+    <div class="max-w-4xl mx-auto px-6 md:px-12 py-24 md:py-32 fade-up" data-animate>
+      <div class="text-center mb-14">
+        <p class="font-blackletter text-blood text-2xl mb-4" x-text="lang==='tr' ? 'Merak edilenler' : 'Good to know'">
+        </p>
+        <h2 class="font-display font-bold text-5xl md:text-6xl uppercase">
+          <span x-show="lang==='tr'"><span class="text-bone">Sıkça Sorulan</span> <span
+              class="text-blood">Sorular</span></span>
+          <span x-show="lang==='en'" x-cloak><span class="text-bone">Frequently Asked</span> <span
+              class="text-blood">Questions</span></span>
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <div x-data="{ expanded: false }" class="bg-card border border-line"
+          :class="expanded ? 'border-l-blood border-l-2' : ''">
+          <button @click="expanded = !expanded"
+            class="w-full flex justify-between items-center gap-6 p-6 text-left hover:bg-ink transition-colors">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-smoke">01</span>
+              <span class="font-mono font-medium text-bone uppercase tracking-[0.15em] text-xs"
+                x-text="lang==='tr' ? 'Fiyat nasıl belirleniyor?' : 'How is pricing determined?'"></span>
+            </span>
+            <span x-text="expanded ? '−' : '＋'" class="text-blood text-2xl font-display flex-none"></span>
+          </button>
+          <div x-show="expanded" x-collapse x-cloak class="px-6 pb-6 text-ash text-sm leading-relaxed">
+            <span x-show="lang==='tr'">Her dövme; boyut, detay yoğunluğu, vücut bölgesi ve tahmini seans süresine göre
+              fiyatlandırılır. Tasarım netleştikten sonra sabit ve şeffaf bir fiyat alırsın — sürpriz yok. İlk danışma
+              her zaman ücretsizdir.</span>
+            <span x-show="lang==='en'" x-cloak>Every tattoo is priced by size, detail density, placement and estimated
+              session time. Once the design is locked, you get a fixed, transparent quote — no surprises. The first
+              consultation is always free.</span>
+          </div>
+        </div>
+
+        <div x-data="{ expanded: false }" class="bg-card border border-line"
+          :class="expanded ? 'border-l-blood border-l-2' : ''">
+          <button @click="expanded = !expanded"
+            class="w-full flex justify-between items-center gap-6 p-6 text-left hover:bg-ink transition-colors">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-smoke">02</span>
+              <span class="font-mono font-medium text-bone uppercase tracking-[0.15em] text-xs"
+                x-text="lang==='tr' ? 'Çok acır mı?' : 'Does it hurt?'"></span>
+            </span>
+            <span x-text="expanded ? '−' : '＋'" class="text-blood text-2xl font-display flex-none"></span>
+          </button>
+          <div x-show="expanded" x-collapse x-cloak class="px-6 pb-6 text-ash text-sm leading-relaxed">
+            <span x-show="lang==='tr'">Acı eşiği kişiden kişiye ve bölgeden bölgeye değişir. Kaburga ve eklem çevresi
+              daha hassastır; kol ve bacakların dış yüzeyleri daha rahattır. Seans boyunca ritmi birlikte ayarlarız,
+              istediğin an mola veririz.</span>
+            <span x-show="lang==='en'" x-cloak>Pain tolerance varies by person and placement. Ribs and joints are more
+              sensitive; outer arms and legs are easier. We set the pace together during the session and take breaks
+              whenever you need.</span>
+          </div>
+        </div>
+
+        <div x-data="{ expanded: false }" class="bg-card border border-line"
+          :class="expanded ? 'border-l-blood border-l-2' : ''">
+          <button @click="expanded = !expanded"
+            class="w-full flex justify-between items-center gap-6 p-6 text-left hover:bg-ink transition-colors">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-smoke">03</span>
+              <span class="font-mono font-medium text-bone uppercase tracking-[0.15em] text-xs"
+                x-text="lang==='tr' ? 'Hijyen konusunda nasıl çalışıyorsun?' : 'How do you handle hygiene?'"></span>
+            </span>
+            <span x-text="expanded ? '−' : '＋'" class="text-blood text-2xl font-display flex-none"></span>
+          </button>
+          <div x-show="expanded" x-collapse x-cloak class="px-6 pb-6 text-ash text-sm leading-relaxed">
+            <span x-show="lang==='tr'">İğne, kartuş ve tüm temas yüzeyleri tek kullanımlıktır; her seans öncesi senin
+              önünde açılır. İstasyon her seanstan sonra dezenfekte edilir, pigmentlerde yalnızca sertifikalı markalar
+              kullanılır.</span>
+            <span x-show="lang==='en'" x-cloak>Needles, cartridges and every contact surface are single-use, opened in
+              front of you before each session. The station is fully disinfected after every client, and I only work
+              with certified pigment brands.</span>
+          </div>
+        </div>
+
+        <div x-data="{ expanded: false }" class="bg-card border border-line"
+          :class="expanded ? 'border-l-blood border-l-2' : ''">
+          <button @click="expanded = !expanded"
+            class="w-full flex justify-between items-center gap-6 p-6 text-left hover:bg-ink transition-colors">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-smoke">04</span>
+              <span class="font-mono font-medium text-bone uppercase tracking-[0.15em] text-xs"
+                x-text="lang==='tr' ? 'Dövme sonrası bakım nasıl olmalı?' : 'How should I care for my tattoo?'"></span>
+            </span>
+            <span x-text="expanded ? '−' : '＋'" class="text-blood text-2xl font-display flex-none"></span>
+          </button>
+          <div x-show="expanded" x-collapse x-cloak class="px-6 pb-6 text-ash text-sm leading-relaxed">
+            <span x-show="lang==='tr'">İlk saatlerde koruyucu film üzerinde kalır; sonrasında nazikçe yıka, ince katman
+              krem uygula. 3–4 hafta doğrudan güneş, havuz ve denizden uzak dur. Seans sonunda yazılı bakım talimatı
+              veririm ve iyileşme boyunca ulaşılabilirim.</span>
+            <span x-show="lang==='en'" x-cloak>Keep the protective film on for the first hours, then wash gently and
+              apply thin layers of cream. Avoid direct sun, pools and sea for 3–4 weeks. You receive written aftercare
+              instructions, and I stay reachable throughout healing.</span>
+          </div>
+        </div>
+
+        <div x-data="{ expanded: false }" class="bg-card border border-line"
+          :class="expanded ? 'border-l-blood border-l-2' : ''">
+          <button @click="expanded = !expanded"
+            class="w-full flex justify-between items-center gap-6 p-6 text-left hover:bg-ink transition-colors">
+            <span class="flex items-baseline gap-4">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-smoke">05</span>
+              <span class="font-mono font-medium text-bone uppercase tracking-[0.15em] text-xs"
+                x-text="lang==='tr' ? 'Randevu ve kapora nasıl işliyor?' : 'How do booking and deposits work?'"></span>
+            </span>
+            <span x-text="expanded ? '−' : '＋'" class="text-blood text-2xl font-display flex-none"></span>
+          </button>
+          <div x-show="expanded" x-collapse x-cloak class="px-6 pb-6 text-ash text-sm leading-relaxed">
+            <span x-show="lang==='tr'">Tarih, kapora ile kesinleşir ve kapora toplam ücretten düşülür. Randevunu 48 saat
+              öncesine kadar ücretsiz erteleyebilirsin.</span>
+            <span x-show="lang==='en'" x-cloak>Your date is confirmed with a deposit, which is deducted from the total
+              price. You can reschedule free of charge up to 48 hours before your session.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Randevu ════ -->
+  <section id="randevu" class="bg-ink">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+        <div>
+          <p class="font-blackletter text-blood text-2xl mb-4"
+            x-text="lang==='tr' ? 'Hikâyeni anlat' : 'Tell your story'"></p>
+          <h2 class="font-display font-bold text-[clamp(3rem,7vw,5.5rem)] uppercase leading-none mb-8">
+            <span x-show="lang==='tr'"><span class="text-bone">Bir</span> <span class="text-blood">Hikâye</span> <span
+                class="text-bone">Anlat</span></span>
+            <span x-show="lang==='en'" x-cloak><span class="text-bone">Tell a</span> <span
+                class="text-blood">Story</span></span>
+          </h2>
+          <p class="text-ash leading-relaxed mb-12 max-w-md">
+            <span x-show="lang==='tr'">Fikrini, ölçünü, hayalini paylaş. 48 saat içinde dönüş yapıyorum. WhatsApp'tan
+              da yazabilirsin.</span>
+            <span x-show="lang==='en'" x-cloak>Share your idea, size, vision. I respond within 48 hours. WhatsApp also
+              works.</span>
+          </p>
+
+          <dl class="border-t border-line max-w-md">
+            <div class="flex items-center justify-between gap-6 py-5 border-b border-line">
+              <dt class="font-mono text-[10px] tracking-[0.25em] uppercase text-smoke"
+                x-text="lang==='tr' ? 'E-posta' : 'Email'"></dt>
+              <dd><a href="mailto:info@begotattoo.com"
+                  class="text-bone text-sm hover:text-blood transition-colors">info@begotattoo.com</a></dd>
+            </div>
+            <div class="flex items-center justify-between gap-6 py-5 border-b border-line">
+              <dt class="font-mono text-[10px] tracking-[0.25em] uppercase text-smoke"
+                x-text="lang==='tr' ? 'Telefon' : 'Phone'"></dt>
+              <dd><a href="tel:+905424590699" class="text-bone text-sm hover:text-blood transition-colors">+90 542 459
+                  0699</a></dd>
+            </div>
+            <div class="flex items-center justify-between gap-6 py-5 border-b border-line">
+              <dt class="font-mono text-[10px] tracking-[0.25em] uppercase text-smoke"
+                x-text="lang==='tr' ? 'Stüdyo' : 'Studio'"></dt>
+              <dd class="text-bone text-sm">Beyoğlu / İstanbul, TR</dd>
+            </div>
+            <div class="flex items-center justify-between gap-6 py-5 border-b border-line">
+              <dt class="font-mono text-[10px] tracking-[0.25em] uppercase text-smoke"
+                x-text="lang==='tr' ? 'Dönüş süresi' : 'Response time'"></dt>
+              <dd class="text-bone text-sm" x-text="lang==='tr' ? '48 saat içinde' : 'Within 48 hours'"></dd>
+            </div>
+          </dl>
+        </div>
+
+        <form x-data="bookingForm()" @submit.prevent="send(lang)" class="flex flex-col gap-7">
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+              x-text="lang==='tr' ? 'Ad Soyad *' : 'Full name *'"></label>
+            <input type="text" x-model="name" required :placeholder="lang==='tr' ? 'Adın' : 'Your name'"
+              class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood placeholder-smoke transition-colors" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+            <div>
+              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+                x-text="lang==='tr' ? 'E-posta' : 'Email'"></label>
+              <input type="email" x-model="email" :placeholder="lang==='tr' ? 'ornek@mail.com' : 'name@mail.com'"
+                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood placeholder-smoke transition-colors" />
+            </div>
+            <div>
+              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+                x-text="lang==='tr' ? 'Telefon (opsiyonel)' : 'Phone (optional)'"></label>
+              <input type="tel" x-model="phone" placeholder="+90 ..."
+                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood placeholder-smoke transition-colors" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+              x-text="lang==='tr' ? 'Stil' : 'Style'"></label>
+            <select x-model="style"
+              class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood transition-colors appearance-none cursor-pointer">
+              <option value="" x-text="lang==='tr' ? 'Tarz seç' : 'Select style'"></option>
+              <option value="Blackwork">Blackwork</option>
+              <option value="Color">Color</option>
+              <option value="Neo-Trad">Neo-Trad</option>
+              <option value="Minimalist">Minimalist</option>
+              <option value="Designs">Designs</option>
+              <option value="Black & Gray">Black &amp; Gray</option>
+              <option value="?" x-text="lang==='tr' ? 'Emin değilim' : 'Not sure'"></option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+            <div>
+              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+                x-text="lang==='tr' ? 'Tarih' : 'Date'"></label>
+              <input type="date" x-model="date"
+                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood transition-colors [color-scheme:dark]" />
+            </div>
+            <div>
+              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+                x-text="lang==='tr' ? 'Saat' : 'Time'"></label>
+              <input type="time" x-model="time"
+                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood transition-colors [color-scheme:dark]" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
+              x-text="lang==='tr' ? 'Fikrin *' : 'Your idea *'"></label>
+            <textarea rows="4" x-model="idea" required
+              :placeholder="lang==='tr' ? 'Boyut, vücut bölgesi, ilham...' : 'Size, body part, inspiration...'"
+              class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood placeholder-smoke resize-none transition-colors"></textarea>
+          </div>
+
+          <div>
+            <button type="submit"
+              class="w-full sm:w-auto bg-blood text-bone font-mono text-xs font-medium px-10 py-4 uppercase tracking-[0.25em] hover:bg-bloodbright hover:-translate-y-0.5 transition-all duration-300">
+              <span x-text="lang==='tr' ? 'WhatsApp\'tan Gönder' : 'Send via WhatsApp'"></span>
+            </button>
+            <p class="font-mono text-[10px] tracking-[0.2em] uppercase text-smoke mt-4"
+              x-text="lang==='tr' ? 'Mesajın WhatsApp\'ta hazır açılır — göndermeden önce kontrol edersin.' : 'Opens a ready message in WhatsApp — you review it before sending.'">
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Footer ════ -->
+  <footer class="border-t border-line bg-coal">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-14">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-10">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <img src="img/logo.png" alt="BegoTattoo" class="h-12"
+              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
+            <span class="hidden font-display font-bold text-2xl text-bone">BEGO<span
+                class="text-blood">TATTOO</span></span>
+          </div>
+          <p class="font-blackletter text-ash text-xl"
+            x-text="lang==='tr' ? 'Hikâyesi olan mürekkep · İstanbul' : 'Ink with story · İstanbul'"></p>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim fade-scale" data-animate style="animation-delay: 0s"
+            aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.34 2.69.93 3.36.62 4.15.32 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.93 19.85.62c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
+            </svg>
+          </a>
+          <a href="https://tr.pinterest.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim fade-scale" data-animate style="animation-delay: 0.1s"
+            aria-label="Pinterest">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
+            </svg>
+          </a>
+          <a href="https://x.com/codeBego" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim fade-scale" data-animate style="animation-delay: 0.2s"
+            aria-label="X">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100066284982782" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim fade-scale" data-animate style="animation-delay: 0.3s"
+            aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim fade-scale" data-animate style="animation-delay: 0.4s"
+            aria-label="TikTok">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="pt-8 border-t border-line flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-smoke">© 2026 BegoTattoo. <span
+            x-text="lang==='tr' ? 'Tüm hakları saklıdır.' : 'All rights reserved.'"></span></p>
+        <p class="font-mono text-[10px] tracking-[0.2em] text-smoke">Crafted with ink &amp; code · CodeBego
+          Architecture</p>
+      </div>
     </div>
   </footer>
 
+  <!-- ════ WhatsApp ════ -->
   <a href="https://wa.me/905424590699" target="_blank" rel="noopener"
-    class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-green-600 text-white p-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all hover:scale-110 flex items-center gap-3 group rounded-full"
+    class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-green-600 text-white p-4 shadow-[0_0_20px_rgba(37,211,102,0.35)] transition-all hover:scale-110 flex items-center rounded-full"
     aria-label="WhatsApp">
-    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
       <path
         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
     </svg>
   </a>
 
+  <!-- Scroll animasyonları -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const observer = new IntersectionObserver((entries) => {
@@ -741,6 +1469,26 @@
 
       document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
     });
+  </script>
+
+  <!-- Mürekkep hattı: scroll ile çizilir -->
+  <script>
+    (() => {
+      const sp = document.getElementById('spinePath');
+      if (!sp) return;
+      let queued = false;
+      const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+        sp.style.strokeDashoffset = String(1 - p);
+        queued = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!queued) { queued = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
   </script>
 
   <!-- Açılış intro: cam kırığı parçalanma efekti -->
@@ -799,8 +1547,11 @@
       }
 
       function shatter() {
-        if (started || !logo.complete || !logo.naturalWidth) {
-          intro.style.display = 'none';
+        if (started) return;
+        if (!logo.complete || !logo.naturalWidth || logo.style.display === 'none') {
+          started = true;
+          intro.style.opacity = '0';
+          setTimeout(() => { intro.style.display = 'none'; }, 400);
           return;
         }
         started = true;
@@ -874,6 +1625,7 @@
 
       intro.addEventListener('click', shatter);
       intro.addEventListener('touchstart', (e) => { e.preventDefault(); shatter(); }, { passive: false });
+      window.addEventListener('keydown', shatter);
     })();
   </script>
 
