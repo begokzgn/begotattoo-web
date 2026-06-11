@@ -1,0 +1,76 @@
+================================================================
+PROJE BAĞLAM DOSYASI
+================================================================
+
+PROJE ADI        : BegoTattoo v2
+MÜŞTERİ          : Bego (Heybetli Kızgın)
+SEKTÖR           : Dövme / Tattoo Studio
+WEB SİTESİ AMACI : Tanıtım + Portfolyo + Randevu
+TESLİM TARİHİ    : -
+
+----------------------------------------------------------------
+MARKA KİMLİĞİ
+----------------------------------------------------------------
+LOGO YAZISI      : BEGO TATTOO
+SLOGAN           : Ink with Story / Hikâyesi Olan Mürekkep
+TONE OF VOICE    : Karanlık-sanatsal, kişisel, ciddi ama sıcak
+HEDEF KİTLE      : Türkiye + yabancı turist (28-45 yaş, sanata değer veren)
+
+----------------------------------------------------------------
+RENK PALETİ
+----------------------------------------------------------------
+ARKAPLAN         : #0a0a0a (rich black)
+KART/DOKU        : #1a1a1a (off-black)
+PRİMER ACCENT    : #DC2626 (kan kırmızısı — CTA, vurgu)
+SEKONDER ACCENT  : #38BDF8 (açık mavi — link, ikon detay)
+NÖTR             : Gri tonları (#a0a0a0, #2a2a2a)
+
+----------------------------------------------------------------
+TİPOGRAFİ
+----------------------------------------------------------------
+BAŞLIK FONTU     : "Bebas Neue" (sert, endüstriyel, dövmeye yakışır)
+BODY FONTU       : "Inter" (modern, okunaklı)
+ACCENT FONTU     : "Cormorant Garamond" italic (alt başlıklarda, sanatsal dokunuş)
+
+----------------------------------------------------------------
+SAYFA YAPISI
+----------------------------------------------------------------
+[x] Hero (anasayfa)
+[x] Hakkımda
+[x] Portfolyo / Galeri (filtrelenebilir: realistic, blackwork, fineline vb.)
+[x] Randevu / İletişim (form + WhatsApp + harita)
+[x] Sosyal medya footer (Instagram, Pinterest, X, Facebook, TikTok)
+
+----------------------------------------------------------------
+İÇERİK BİLGİLERİ
+----------------------------------------------------------------
+TELEFON          : (Bego güncelleyecek)
+EMAIL            : info@begotattoo.com
+ADRES            : İstanbul (Bego güncelleyecek)
+INSTAGRAM        : @begotattoo
+PINTEREST        : (Bego güncelleyecek)
+X (TWITTER)      : (Bego güncelleyecek)
+FACEBOOK         : (Bego güncelleyecek)
+TIKTOK           : (Bego güncelleyecek)
+HARİTA           : Evet
+
+----------------------------------------------------------------
+DİL
+----------------------------------------------------------------
+ÇİFT DİL         : TR + EN (sağ üstte dil toggle)
+DEFAULT          : TR
+
+----------------------------------------------------------------
+TEKNİK NOTLAR
+----------------------------------------------------------------
+CLOUDFLARE DOMAIN: begotattoo.com (mevcut)
+GITHUB REPO      : begotattoo-v2 (yeni)
+ÖZEL İSTEKLER    :
+  - 10 yıllık deneyim vurgusu
+  - Sanatsal/galeri hissiyatı, ticari değil
+  - Mobile-first, randevu butonu her zaman erişilebilir
+  - Portfolyo grid'i çok güçlü görünmeli (en kritik section)
+  - Glassmorphism efektleri var ama abartısız
+  - Footer'da sosyal ikonlar belirgin
+
+================================================================
