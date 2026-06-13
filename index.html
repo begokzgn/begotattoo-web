@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" x-data="{ lang: 'tr', mobileMenu: false, filter: 'all' }" class="scroll-smooth">
+<html lang="tr" x-data="{ lang: 'tr', mobileMenu: false, filter: 'all', aftercare: false }" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
@@ -51,7 +51,7 @@
   <script>
     function bookingForm() {
       return {
-        name: '', email: '', phone: '', style: '', date: '', time: '', idea: '',
+        name: '', email: '', phone: '', style: '', idea: '',
         send(l) {
           const tr = l === 'tr';
           const lines = tr ? [
@@ -61,7 +61,6 @@
             this.email ? 'E-posta: ' + this.email : null,
             this.phone ? 'Telefon: ' + this.phone : null,
             this.style ? 'Stil: ' + this.style : null,
-            (this.date || this.time) ? ('Tercih edilen zaman: ' + this.date + ' ' + this.time).trim() : null,
             '',
             'Fikrim: ' + this.idea
           ] : [
@@ -71,7 +70,6 @@
             this.email ? 'Email: ' + this.email : null,
             this.phone ? 'Phone: ' + this.phone : null,
             this.style ? 'Style: ' + this.style : null,
-            (this.date || this.time) ? ('Preferred time: ' + this.date + ' ' + this.time).trim() : null,
             '',
             'My idea: ' + this.idea
           ];
@@ -88,7 +86,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,400..800&family=Pirata+One&family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Bebas+Neue&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,400..800&family=Pirata+One&family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Bebas+Neue&family=Syne:wght@800&display=swap"
     rel="stylesheet" />
 
   <style>
@@ -324,6 +322,54 @@
       stroke-linejoin: round;
     }
 
+    /* Instagram CTA — çizgiler gökkuşağı gradient'iyle çizilir */
+    .ig-card .ig-glyph path {
+      stroke: url(#igGrad);
+    }
+
+    /* Bakım kartı dikkat oku — flash-art çizgi dili + kendini çizen animasyon + sallanma */
+    .attn-arrow-wrap {
+      animation: arrowBob 1.8s ease-in-out infinite;
+    }
+
+    @keyframes arrowBob {
+      0%, 100% {
+        transform: translate(-50%, 0);
+      }
+      50% {
+        transform: translate(-50%, 7px);
+      }
+    }
+
+    .attn-arrow path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      animation: arrowDraw 2.4s ease-in-out infinite;
+    }
+
+    .attn-arrow path:nth-of-type(2) {
+      animation-delay: .2s;
+    }
+
+    @keyframes arrowDraw {
+      0% {
+        stroke-dashoffset: 1;
+      }
+      40% {
+        stroke-dashoffset: 0;
+      }
+      70% {
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dashoffset: 1;
+      }
+    }
+
     .portfolio-item .flash-art {
       color: #5C5852;
       transition: color .45s ease;
@@ -372,13 +418,6 @@
 
     .portfolio-item:hover {
       box-shadow: inset 0 0 0 1px #C8102E;
-    }
-
-    /* Karanlık tema tarih/saat ikonu */
-    input[type="date"]::-webkit-calendar-picker-indicator,
-    input[type="time"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      cursor: pointer;
     }
 
     select option {
@@ -598,6 +637,22 @@
           <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-smoke hover:text-ash'"
             class="transition-colors">EN</button>
         </div>
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.34 2.69.93 3.36.62 4.15.32 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.93 19.85.62c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
+            </svg>
+          </a>
+          <a href="https://tr.pinterest.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim" aria-label="Pinterest">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
+            </svg>
+          </a>
+        </div>
         <a href="#randevu"
           class="bg-blood text-bone font-mono text-[11px] font-medium px-5 py-2.5 uppercase tracking-[0.2em] hover:bg-bloodbright transition-colors">
           <span x-text="lang==='tr' ? 'Randevu Al' : 'Book Now'"></span>
@@ -628,10 +683,28 @@
       <a href="#randevu" @click="mobileMenu=false"
         class="text-ash hover:text-bone font-mono uppercase tracking-[0.25em] text-xs"
         x-text="lang==='tr' ? 'Randevu' : 'Booking'"></a>
-      <div class="flex items-center gap-3 pt-3 border-t border-line font-mono text-xs uppercase tracking-[0.2em]">
-        <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-smoke'">TR</button>
-        <span class="text-smoke">/</span>
-        <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-smoke'">EN</button>
+      <div class="flex items-center justify-between gap-3 pt-3 border-t border-line font-mono text-xs uppercase tracking-[0.2em]">
+        <div class="flex items-center gap-3">
+          <button @click="lang='tr'" :class="lang==='tr' ? 'text-blood' : 'text-smoke'">TR</button>
+          <span class="text-smoke">/</span>
+          <button @click="lang='en'" :class="lang==='en' ? 'text-blood' : 'text-smoke'">EN</button>
+        </div>
+        <div class="flex items-center gap-5">
+          <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.34 2.69.93 3.36.62 4.15.32 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.93 19.85.62c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
+            </svg>
+          </a>
+          <a href="https://tr.pinterest.com/begotattx" target="_blank" rel="noopener"
+            class="text-ash hover:text-blood social-icon-anim" aria-label="Pinterest">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -731,9 +804,6 @@
             src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1188,fit=crop/Yg2yoWKEZvigaK0k/instagram_b65mlzqa7ep-mjEGoV96aDtpvKLv.jpg"
             alt="Bego — kurucu dövme sanatçısı"
             class="w-full aspect-[3/4] object-cover border border-line grayscale hover:grayscale-0 transition-[filter] duration-700" />
-          <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke mt-4">
-            Fig. 01 — <span x-text="lang==='tr' ? 'Sanatçı' : 'The Artist'"></span>
-          </p>
         </div>
 
         <div>
@@ -778,12 +848,6 @@
               <dt class="text-smoke" x-text="lang==='tr' ? 'Uzmanlık' : 'Focus'"></dt>
               <dd class="text-bone text-right">Blackwork · Fine Line · Neo-Trad</dd>
             </div>
-            <div
-              class="flex items-center justify-between gap-6 py-4 border-b border-line font-mono text-[11px] tracking-[0.2em] uppercase">
-              <dt class="text-smoke" x-text="lang==='tr' ? 'Hijyen' : 'Hygiene'"></dt>
-              <dd class="text-bone text-right"
-                x-text="lang==='tr' ? 'Tek kullanımlık ekipman' : 'Single-use equipment'"></dd>
-            </div>
           </dl>
         </div>
       </div>
@@ -802,8 +866,6 @@
             <span x-show="lang==='en'" x-cloak>The Process</span>
           </h2>
         </div>
-        <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke"
-          x-text="lang==='tr' ? '5 adım — tek hikâye' : '5 steps — one story'"></p>
       </div>
 
       <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-line border border-line">
@@ -812,7 +874,7 @@
           <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
             x-text="lang==='tr' ? 'Danışma' : 'Consultation'"></h3>
           <p class="text-sm text-ash leading-relaxed"
-            x-text="lang==='tr' ? 'Fikrini, hikâyeni ve vücut bölgesini konuşuruz. Ücretsizdir.' : 'We talk through your idea, story and placement. Always free.'">
+            x-text="lang==='tr' ? 'Fikrini, hikâyeni ve vücut bölgesini konuşuruz.' : 'We talk through your idea, story and placement.'">
           </p>
         </li>
         <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.1s">
@@ -820,7 +882,7 @@
           <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
             x-text="lang==='tr' ? 'Tasarım' : 'Design'"></h3>
           <p class="text-sm text-ash leading-relaxed"
-            x-text="lang==='tr' ? 'Sana özel çizim; revizyonlarla birlikte netleşir.' : 'A custom drawing, refined together with revisions.'">
+            x-text="lang==='tr' ? 'Sana özel çizim; revizyonlarla birlikte netleşir. İlk eskiz ücretsizdir.' : 'A custom drawing, refined together with revisions. First sketch is free.'">
           </p>
         </li>
         <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.2s">
@@ -835,16 +897,29 @@
           <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
             x-text="lang==='tr' ? 'Seans' : 'Session'"></h3>
           <p class="text-sm text-ash leading-relaxed"
-            x-text="lang==='tr' ? 'Steril ortamda, ritmi birlikte kurarız. Mola hakkın saklı.' : 'A sterile setup, a pace we set together. Breaks whenever you need.'">
+            x-text="lang==='tr' ? 'Steril ortamda, ritmi birlikte kurarız.' : 'A sterile setup, a pace we set together.'">
           </p>
         </li>
-        <li class="bg-ink p-7 fade-up" data-animate style="animation-delay: 0.4s">
+        <li class="group relative bg-ink p-7 fade-up cursor-pointer hover:bg-coal transition-colors" data-animate
+          style="animation-delay: 0.4s" @click="aftercare = true" role="button" tabindex="0"
+          @keydown.enter="aftercare = true" :aria-label="lang==='tr' ? 'Bakım rehberini aç' : 'Open aftercare guide'">
+          <!-- Dikkat çeken animasyonlu ok -->
+          <div class="attn-arrow-wrap absolute -top-8 left-1/2 z-10 pointer-events-none text-blood" aria-hidden="true">
+            <svg class="attn-arrow w-7 h-7" viewBox="0 0 24 24">
+              <path d="M12 3 V18" pathLength="1" />
+              <path d="M6 12 L12 18 L18 12" pathLength="1" />
+            </svg>
+          </div>
           <span class="font-mono text-[11px] tracking-[0.25em] text-blood">05</span>
-          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3"
+          <h3 class="font-display font-bold text-2xl uppercase text-bone mt-4 mb-3 group-hover:text-blood transition-colors"
             x-text="lang==='tr' ? 'Bakım' : 'Aftercare'"></h3>
           <p class="text-sm text-ash leading-relaxed"
             x-text="lang==='tr' ? 'Yazılı bakım talimatı + iyileşme boyunca takip.' : 'Written aftercare instructions + follow-up through healing.'">
           </p>
+          <span
+            class="inline-flex items-center gap-1 mt-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke group-hover:text-blood transition-colors">
+            <span x-text="lang==='tr' ? 'Bakım rehberi' : 'Aftercare guide'"></span> →
+          </span>
         </li>
       </ol>
     </div>
@@ -863,8 +938,6 @@
             <span x-show="lang==='en'" x-cloak><span class="text-bone">Selected</span> <span
                 class="text-blood">Work</span></span>
           </h2>
-          <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke"
-            x-text="lang==='tr' ? '12 çalışma — 6 stil' : '12 pieces — 6 styles'"></p>
         </div>
 
         <div class="flex flex-wrap gap-2">
@@ -882,15 +955,18 @@
       </div>
 
       <!-- Flash sheet ızgarası -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-line border border-line">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-px bg-line border border-line max-w-5xl mx-auto">
 
         <!-- 01 · blackwork · hançer -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='blackwork'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='blackwork'" @click="filter = 'blackwork'">
+          <img src="bego/blackwork1.png" alt="Blackwork dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             01</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path d="M32 6 L37 17 L34 45 L32 51 L30 45 L27 17 Z" pathLength="1" />
             <path d="M32 13 V42" pathLength="1" />
             <path d="M19 51 H45" pathLength="1" />
@@ -903,12 +979,15 @@
         </div>
 
         <!-- 02 · color · gül -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='color'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='color'" @click="filter = 'color'">
+          <img src="bego/colors1.png" alt="Renkli dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             02</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path d="M35 33 a4 4 0 1 0 -4 4" pathLength="1" />
             <path d="M40 30 a9 9 0 1 0 -9 9" pathLength="1" />
             <path d="M45 28 a14 14 0 1 0 -14 14" pathLength="1" />
@@ -921,12 +1000,15 @@
         </div>
 
         <!-- 03 · neotrad · yılan -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='neotrad'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='neotrad'" @click="filter = 'neotrad'">
+          <img src="bego/neotrad1.jpeg" alt="Neo-trad dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             03</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path d="M15 71 C5 60 28 54 36 46 C46 38 14 32 24 22 C29 16 39 15 43 20" pathLength="1" />
             <path d="M43 20 q6 -3 8 3 q2 6 -5 7 q-6 1 -7 -5" pathLength="1" />
             <path d="M51 25 L58 28 M51 25 L57 23" pathLength="1" />
@@ -938,12 +1020,15 @@
         </div>
 
         <!-- 04 · minimalist · hilal -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='minimalist'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='minimalist'" @click="filter = 'minimalist'">
+          <img src="bego/minimal1.png" alt="Minimalist dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             04</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path d="M41 13 a23 23 0 1 0 0 46 a18 18 0 1 1 0 -46" pathLength="1" />
             <path d="M51 24 v6 M48 27 h6" pathLength="1" />
             <path d="M49 50 v4 M47 52 h4" pathLength="1" />
@@ -954,12 +1039,15 @@
         </div>
 
         <!-- 05 · designs · göz -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='designs'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='designs'" @click="filter = 'designs'">
+          <img src="bego/design1.png" alt="Tasarım dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             05</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path d="M9 40 Q32 19 55 40 Q32 61 9 40 Z" pathLength="1" />
             <path d="M32 31 a9 9 0 1 0 0.02 0" pathLength="1" />
             <path d="M32 37 a3.5 3.5 0 1 0 0.02 0" pathLength="1" />
@@ -971,12 +1059,15 @@
         </div>
 
         <!-- 06 · blackandgray · kuru kafa -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='blackandgray'">
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center cursor-pointer isolate"
+          x-show="filter==='all' || filter==='blackandgray'" @click="filter = 'blackandgray'">
+          <img src="bego/blackgray1.png" alt="Black & gray dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             06</span>
-          <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+          <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
             <path
               d="M32 9 C19 9 12 18 12 28 C12 35 16 39 20 42 L20 50 C20 55 25 57 32 57 C39 57 44 55 44 50 L44 42 C48 39 52 35 52 28 C52 18 45 9 32 9 Z"
               pathLength="1" />
@@ -989,14 +1080,17 @@
             &amp; Gray</span>
         </div>
 
-        <!-- 07 · blackwork · hançer (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='blackwork'">
+        <!-- 07 · blackwork · hançer (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='blackwork'">
+          <img src="bego/blackwork2.png" alt="Blackwork dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             07</span>
           <div class="rotate-[8deg]">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path d="M32 6 L37 17 L34 45 L32 51 L30 45 L27 17 Z" pathLength="1" />
               <path d="M32 13 V42" pathLength="1" />
               <path d="M19 51 H45" pathLength="1" />
@@ -1009,14 +1103,17 @@
             class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Blackwork</span>
         </div>
 
-        <!-- 08 · color · gül (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='color'">
+        <!-- 08 · color · gül (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='color'">
+          <img src="bego/colors2.png" alt="Renkli dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             08</span>
           <div class="-rotate-6 -scale-x-100">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path d="M35 33 a4 4 0 1 0 -4 4" pathLength="1" />
               <path d="M40 30 a9 9 0 1 0 -9 9" pathLength="1" />
               <path d="M45 28 a14 14 0 1 0 -14 14" pathLength="1" />
@@ -1029,14 +1126,17 @@
             class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Color</span>
         </div>
 
-        <!-- 09 · neotrad · yılan (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='neotrad'">
+        <!-- 09 · neotrad · yılan (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='neotrad'">
+          <img src="bego/neotrad2.jpeg" alt="Neo-trad dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             09</span>
           <div class="-scale-x-100 rotate-3">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path d="M15 71 C5 60 28 54 36 46 C46 38 14 32 24 22 C29 16 39 15 43 20" pathLength="1" />
               <path d="M43 20 q6 -3 8 3 q2 6 -5 7 q-6 1 -7 -5" pathLength="1" />
               <path d="M51 25 L58 28 M51 25 L57 23" pathLength="1" />
@@ -1048,14 +1148,17 @@
             class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Neo-Trad</span>
         </div>
 
-        <!-- 10 · minimalist · hilal (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='minimalist'">
+        <!-- 10 · minimalist · hilal (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='minimalist'">
+          <img src="bego/minimal2.jpeg" alt="Minimalist dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             10</span>
           <div class="-scale-x-100 -rotate-6">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path d="M41 13 a23 23 0 1 0 0 46 a18 18 0 1 1 0 -46" pathLength="1" />
               <path d="M51 24 v6 M48 27 h6" pathLength="1" />
               <path d="M49 50 v4 M47 52 h4" pathLength="1" />
@@ -1066,14 +1169,17 @@
             class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Minimalist</span>
         </div>
 
-        <!-- 11 · designs · göz (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='designs'">
+        <!-- 11 · designs · göz (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='designs'">
+          <img src="bego/design2.png" alt="Tasarım dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             11</span>
           <div class="rotate-[5deg]">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path d="M9 40 Q32 19 55 40 Q32 61 9 40 Z" pathLength="1" />
               <path d="M32 31 a9 9 0 1 0 0.02 0" pathLength="1" />
               <path d="M32 37 a3.5 3.5 0 1 0 0.02 0" pathLength="1" />
@@ -1085,14 +1191,17 @@
             class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Designs</span>
         </div>
 
-        <!-- 12 · blackandgray · kuru kafa (varyant) -->
-        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center"
-          x-show="filter==='all' || filter==='blackandgray'">
+        <!-- 12 · blackandgray · kuru kafa (varyant) — yalnız kategori seçiliyken -->
+        <div class="portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center isolate"
+          x-show="filter !== 'all' && filter==='blackandgray'">
+          <img src="bego/blackgray2.png" alt="Black & gray dövme" loading="lazy"
+            class="absolute inset-0 -z-10 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/40 group-hover:via-ink/50 group-hover:to-ink/20 transition-all duration-700"></div>
           <span
             class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
             12</span>
           <div class="-rotate-3">
-            <svg class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+            <svg x-show="filter === 'all'" class="flash-art w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
               <path
                 d="M32 9 C19 9 12 18 12 28 C12 35 16 39 20 42 L20 50 C20 55 25 57 32 57 C39 57 44 55 44 50 L44 42 C48 39 52 35 52 28 C52 18 45 9 32 9 Z"
                 pathLength="1" />
@@ -1105,11 +1214,66 @@
           <span class="absolute bottom-4 left-4 font-mono text-[10px] tracking-[0.25em] uppercase text-smoke">Black
             &amp; Gray</span>
         </div>
-      </div>
 
-      <p class="font-mono text-[10px] tracking-[0.3em] uppercase text-smoke mt-6"
-        x-text="lang==='tr' ? '* Flash motifler temsilidir — gerçek çalışmalar Instagram\'da' : '* Flash motifs are placeholders — real work lives on Instagram'">
-      </p>
+        <!-- Instagram gökkuşağı gradient tanımı (tüm CTA kartları paylaşır) -->
+        <svg width="0" height="0" class="absolute" aria-hidden="true">
+          <defs>
+            <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#F09433" />
+              <stop offset="25%" stop-color="#E6683C" />
+              <stop offset="50%" stop-color="#DC2743" />
+              <stop offset="75%" stop-color="#CC2366" />
+              <stop offset="100%" stop-color="#BC1888" />
+            </linearGradient>
+            <!-- Pinterest kırmızısı — koyu→parlak, dark/industrial uyumlu -->
+            <linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E60023" />
+              <stop offset="100%" stop-color="#8C0014" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Kategoriye özel Instagram CTA kartları — yalnız ilgili filtre seçiliyken görünür -->
+        <template
+          x-for="cat in ['blackwork', 'color', 'neotrad', 'minimalist', 'designs', 'blackandgray']" :key="cat">
+          <a x-show="filter !== 'all' && filter === cat"
+            :href="cat === 'designs' ? 'https://tr.pinterest.com/begotattx' : 'https://www.instagram.com/begotattx'"
+            target="_blank" rel="noopener"
+            class="ig-card portfolio-item group relative aspect-[3/4] bg-ink flex items-center justify-center hover:bg-blood/[0.04]">
+            <!-- Baskı/stencil kesim işaretleri -->
+            <span class="absolute top-3 left-3 w-5 h-5 border-t border-l border-blood/60 group-hover:border-blood transition-colors" aria-hidden="true"></span>
+            <span class="absolute top-3 right-3 w-5 h-5 border-t border-r border-blood/60 group-hover:border-blood transition-colors" aria-hidden="true"></span>
+            <span class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-blood/60 group-hover:border-blood transition-colors" aria-hidden="true"></span>
+            <span class="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-blood/60 group-hover:border-blood transition-colors" aria-hidden="true"></span>
+
+            <span
+              class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-smoke group-hover:text-blood transition-colors">Nº
+              +</span>
+
+            <!-- Instagram glifi (gökkuşağı gradient) -->
+            <svg x-show="cat !== 'designs'" class="flash-art ig-glyph w-24 md:w-28" viewBox="0 0 64 80" aria-hidden="true">
+              <path d="M22 22 H42 a8 8 0 0 1 8 8 V50 a8 8 0 0 1 -8 8 H22 a8 8 0 0 1 -8 -8 V30 a8 8 0 0 1 8 -8 Z" pathLength="1" />
+              <path d="M32 30 a10 10 0 1 0 0.02 0" pathLength="1" />
+              <path d="M44 29 l0.01 0" pathLength="1" />
+            </svg>
+            <!-- Pinterest resmi logosu (designs kategorisi) — kırmızı gradient, hover'da canlanır -->
+            <svg x-show="cat === 'designs'" x-cloak
+              class="w-16 md:w-20 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+              viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="url(#pinGrad)"
+                d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.756-1.378l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
+            </svg>
+
+            <span
+              class="absolute bottom-4 left-4 right-4 font-mono text-[10px] tracking-[0.25em] uppercase text-bone group-hover:text-blood transition-colors leading-relaxed">
+              <span x-show="lang==='tr'">Daha fazlası <span class="text-blood"
+                  x-text="cat === 'designs' ? 'Pinterest\'te' : 'Instagram\'da'"></span></span>
+              <span x-show="lang==='en'" x-cloak>More on <span class="text-blood"
+                  x-text="cat === 'designs' ? 'Pinterest' : 'Instagram'"></span></span>
+            </span>
+          </a>
+        </template>
+      </div>
 
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-16 fade-up" data-animate>
         <a href="https://www.instagram.com/begotattx" target="_blank" rel="noopener"
@@ -1268,9 +1432,9 @@
                 class="text-blood">Story</span></span>
           </h2>
           <p class="text-ash leading-relaxed mb-12 max-w-md">
-            <span x-show="lang==='tr'">Fikrini, ölçünü, hayalini paylaş. 48 saat içinde dönüş yapıyorum. WhatsApp'tan
+            <span x-show="lang==='tr'">Fikrini, ölçünü, hayalini paylaş. 24 saat içinde dönüş yapıyorum. WhatsApp'tan
               da yazabilirsin.</span>
-            <span x-show="lang==='en'" x-cloak>Share your idea, size, vision. I respond within 48 hours. WhatsApp also
+            <span x-show="lang==='en'" x-cloak>Share your idea, size, vision. I respond within 24 hours. WhatsApp also
               works.</span>
           </p>
 
@@ -1295,7 +1459,7 @@
             <div class="flex items-center justify-between gap-6 py-5 border-b border-line">
               <dt class="font-mono text-[10px] tracking-[0.25em] uppercase text-smoke"
                 x-text="lang==='tr' ? 'Dönüş süresi' : 'Response time'"></dt>
-              <dd class="text-bone text-sm" x-text="lang==='tr' ? '48 saat içinde' : 'Within 48 hours'"></dd>
+              <dd class="text-bone text-sm" x-text="lang==='tr' ? '24 saat içinde' : 'Within 24 hours'"></dd>
             </div>
           </dl>
         </div>
@@ -1339,21 +1503,6 @@
             </select>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
-            <div>
-              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
-                x-text="lang==='tr' ? 'Tarih' : 'Date'"></label>
-              <input type="date" x-model="date"
-                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood transition-colors [color-scheme:dark]" />
-            </div>
-            <div>
-              <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
-                x-text="lang==='tr' ? 'Saat' : 'Time'"></label>
-              <input type="time" x-model="time"
-                class="w-full bg-transparent border-b border-line text-bone py-3 text-sm focus:outline-none focus:border-blood transition-colors [color-scheme:dark]" />
-            </div>
-          </div>
-
           <div>
             <label class="block font-mono text-[10px] tracking-[0.25em] uppercase text-smoke mb-2"
               x-text="lang==='tr' ? 'Fikrin *' : 'Your idea *'"></label>
@@ -1367,9 +1516,6 @@
               class="w-full sm:w-auto bg-blood text-bone font-mono text-xs font-medium px-10 py-4 uppercase tracking-[0.25em] hover:bg-bloodbright hover:-translate-y-0.5 transition-all duration-300">
               <span x-text="lang==='tr' ? 'WhatsApp\'tan Gönder' : 'Send via WhatsApp'"></span>
             </button>
-            <p class="font-mono text-[10px] tracking-[0.2em] uppercase text-smoke mt-4"
-              x-text="lang==='tr' ? 'Mesajın WhatsApp\'ta hazır açılır — göndermeden önce kontrol edersin.' : 'Opens a ready message in WhatsApp — you review it before sending.'">
-            </p>
           </div>
         </form>
       </div>
@@ -1435,15 +1581,109 @@
         </div>
       </div>
 
-      <div
-        class="pt-8 border-t border-line flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      <div class="pt-8 border-t border-line text-center">
         <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-smoke">© 2026 BegoTattoo. <span
             x-text="lang==='tr' ? 'Tüm hakları saklıdır.' : 'All rights reserved.'"></span></p>
-        <p class="font-mono text-[10px] tracking-[0.2em] text-smoke">Crafted with ink &amp; code · CodeBego
-          Architecture</p>
       </div>
+
+      <!-- begodesign kredisi — ortalanmış, marka logosu -->
+      <p class="mt-6 text-center" style="font-size:14px;">
+        <span style="color:#8A8782;font-weight:400;"
+          x-text="lang==='tr' ? 'Tasarım & geliştirme:' : 'Design & development:'"></span>
+        <a href="https://begodesign.com" target="_blank" rel="noopener"
+          class="transition-opacity duration-300 hover:opacity-70"
+          style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;color:#EDE7DD;">begodesign<span
+            style="color:#E5484D;">.</span></a>
+      </p>
     </div>
   </footer>
+
+  <!-- ════ Bakım Rehberi Modal ════ -->
+  <div x-show="aftercare" x-cloak @keydown.escape.window="aftercare = false"
+    class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+    <!-- Bulanık overlay -->
+    <div x-show="aftercare" x-transition.opacity.duration.300ms @click="aftercare = false"
+      class="absolute inset-0 bg-ink/80 backdrop-blur-sm"></div>
+
+    <!-- Kart -->
+    <div x-show="aftercare" x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95"
+      class="relative bg-card border border-line w-full max-w-2xl max-h-[85vh] overflow-y-auto">
+      <!-- Baskı/stencil kesim işaretleri -->
+      <span class="absolute top-3 left-3 w-5 h-5 border-t border-l border-blood" aria-hidden="true"></span>
+      <span class="absolute top-3 right-3 w-5 h-5 border-t border-r border-blood" aria-hidden="true"></span>
+      <span class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-blood" aria-hidden="true"></span>
+      <span class="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-blood" aria-hidden="true"></span>
+
+      <button @click="aftercare = false" :aria-label="lang==='tr' ? 'Kapat' : 'Close'"
+        class="absolute top-5 right-5 z-10 text-smoke hover:text-blood transition-colors font-mono text-lg leading-none">✕</button>
+
+      <div class="p-8 sm:p-12">
+        <p class="font-blackletter text-blood text-2xl mb-3" x-text="lang==='tr' ? 'İğneden sonra' : 'After the needle'">
+        </p>
+        <h3 class="font-display font-bold text-3xl md:text-4xl uppercase text-bone mb-7 leading-none">
+          <span x-show="lang==='tr'">Dövme Sonrası <span class="text-blood">Bakım Rehberi</span></span>
+          <span x-show="lang==='en'" x-cloak>Tattoo <span class="text-blood">Aftercare Guide</span></span>
+        </h3>
+
+        <!-- TR içerik -->
+        <div x-show="lang==='tr'" class="space-y-5 text-ash text-sm leading-relaxed">
+          <p>Yeni dövmen hayırlı olsun. İşçiliğin deride kusursuz iyileşmesi ve detayların ilk günkü gibi net kalması,
+            stüdyodan çıktıktan sonra yapacağın bu bakıma bağlı. Lütfen aşağıdaki adımları eksiksiz uygula:</p>
+          <ul class="space-y-4">
+            <li class="border-l-2 border-line pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Temizlik</span>
+              Dövmeyi günde 3-4 kez antibakteriyel sabun ve ılık suyla nazikçe yıka. Kurularken kesinlikle ovalama; temiz
+              bir kağıt havlu ile hafifçe tampon yaparak (bastır-çek yöntemiyle) nemini al.
+            </li>
+            <li class="border-l-2 border-line pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Nemlendirme</span>
+              Kurulama işleminden sonra, önerdiğimiz [Önerilen Krem Adını Buraya Yazın] kremini günde 5-6 kez çok ince bir
+              tabaka halinde sür. Dövmeyi kurumaya terk etme ama kremle de boğma; cildin nefes alması iyileşme için
+              şarttır.
+            </li>
+            <li class="border-l-2 border-blood pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Kırmızı Çizgiler
+                (Yasaklar)</span>
+              İyileşme süreci tamamlanana kadar deniz, havuz, hamam ve sauna kesinlikle yasaktır. Enfeksiyon riski ve renk
+              kaybı yaratır. Ayrıca bu süreçte dövmeyi doğrudan güneş ışığından koruman gerekmektedir.
+            </li>
+          </ul>
+          <p>İyileşme evresinde hafif kabuklanma veya kaşıntı olması normaldir; asla kaşıma ve kabukları soyma. Süreçle
+            ilgili aklına takılan herhangi bir durumda doğrudan bizimle iletişime geçebilirsin.</p>
+        </div>
+
+        <!-- EN içerik -->
+        <div x-show="lang==='en'" x-cloak class="space-y-5 text-ash text-sm leading-relaxed">
+          <p>Congratulations on your new tattoo. Flawless healing in the skin and keeping the details as crisp as day one
+            depend on the care you give it after leaving the studio. Please follow every step below carefully:</p>
+          <ul class="space-y-4">
+            <li class="border-l-2 border-line pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Cleaning</span>
+              Gently wash the tattoo 3-4 times a day with antibacterial soap and lukewarm water. Never rub when drying;
+              remove the moisture by lightly dabbing (press-and-lift) with a clean paper towel.
+            </li>
+            <li class="border-l-2 border-line pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Moisturizing</span>
+              After drying, apply a very thin layer of the [Önerilen Krem Adını Buraya Yazın] cream we recommend 5-6 times
+              a day. Don't let the tattoo dry out, but don't smother it with cream either; your skin needs to breathe to
+              heal.
+            </li>
+            <li class="border-l-2 border-blood pl-4">
+              <span class="block font-mono text-[11px] tracking-[0.25em] uppercase text-blood mb-1.5">Red Lines
+                (Don'ts)</span>
+              Until healing is complete, the sea, pools, Turkish baths and saunas are strictly forbidden. They create a
+              risk of infection and color loss. You must also protect the tattoo from direct sunlight during this period.
+            </li>
+          </ul>
+          <p>Light scabbing or itching during healing is normal; never scratch or peel off the scabs. If anything about
+            the process concerns you, you can contact us directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ════ WhatsApp ════ -->
   <a href="https://wa.me/905424590699" target="_blank" rel="noopener"
